@@ -18,32 +18,58 @@ public class StatusService {
     private StatusRepository repository;
 
     public void createStatus(Status status) {
-        LOGGER.info("Adding department");
-        repository.save(status);
+        LOGGER.info("Adding status");
+
+        boolean result = repository.findAll().stream()
+                .filter(status1 -> status1.getName().equals(status.getName()))
+                .count() == 0;
+
+        if (result) {
+            repository.save(status);
+        } else {
+            LOGGER.error("Status already exists.");
+        }
     }
 
     public void updateStatus(Status status) {
-        LOGGER.info("Updating department");
-        repository.save(status);
+        LOGGER.info("Updating status");
+
+        boolean result = repository.findAll().stream()
+                .filter(status1 -> status1.getName().equals(status.getName()))
+                .count() == 0;
+
+        if (result) {
+            repository.save(status);
+        } else {
+            LOGGER.error("Status already exists.");
+        }
     }
 
     public void deleteStatus(int id) {
-        LOGGER.info("Deleting department by id");
-        repository.deleteById(id);
+        LOGGER.info("Deleting status by id");
+        try {
+            repository.deleteById(id);
+        } catch (Exception e) {
+            LOGGER.error("Not found status!");
+        }
     }
 
     public void deleteStatus(Status status) {
-        LOGGER.info("Deleting department");
-        repository.delete(status);
+        LOGGER.info("Deleting status");
+        try {
+            repository.delete(status);
+        } catch (Exception e) {
+            LOGGER.error("Not found status!");
+        }
     }
 
     public List<Status> getStatuses() {
-        LOGGER.info("Fetching departments");
+        LOGGER.info("Fetching status");
         return repository.findAll();
     }
 
     public Status getStatus(int id) {
-        LOGGER.info("Fetching department by id");
+        LOGGER.info("Fetching status by id");
         return repository.findById(id).orElse(null);
     }
 }

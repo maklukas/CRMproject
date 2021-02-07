@@ -24,12 +24,20 @@ public class ClientService {
 
     public void deleteClient(int id) {
         LOGGER.info("Deleting client by id");
-        repository.deleteById(id);
+        try {
+            repository.deleteById(id);
+        } catch (Exception e) {
+            LOGGER.error("Not found client!");
+        }
     }
 
     public void deleteClient(Client client) {
         LOGGER.info("Deleting client");
-        repository.delete(client);
+        try {
+            repository.delete(client);
+        } catch (Exception e) {
+            LOGGER.error("Not found client!");
+        }
     }
 
     public void updateClient(Client client) {

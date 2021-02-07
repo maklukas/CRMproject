@@ -27,12 +27,20 @@ public class TaskService {
 
     public void deleteTask(int id) {
         LOGGER.info("Deleting task by id");
-        repository.deleteById(id);
+        try {
+            repository.deleteById(id);
+        } catch (Exception e) {
+            LOGGER.error("Not found task!");
+        }
     }
 
     public void deleteTask(Task task) {
         LOGGER.info("Deleting task");
-        repository.delete(task);
+        try {
+            repository.delete(task);
+        } catch (Exception e) {
+            LOGGER.error("Not found task!");
+        }
     }
 
     public void updateTask(Task task) {

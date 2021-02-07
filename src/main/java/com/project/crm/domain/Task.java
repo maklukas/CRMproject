@@ -53,7 +53,6 @@ public class Task {
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @NotFound(action = NotFoundAction.IGNORE)
     @JoinColumn(name = "status_id")
-
     private Status status;
 
     private String title;

@@ -24,4 +24,7 @@ public class ServiceConnected {
     @Autowired
     public StatusService status;
 
+    @Autowired
+    public TaskService task;
+
 }

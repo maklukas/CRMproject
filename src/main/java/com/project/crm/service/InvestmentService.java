@@ -31,12 +31,20 @@ public class InvestmentService {
 
     public void deleteInvestment(int id) {
         LOGGER.info("Deleting investment by id");
-        repository.deleteById(id);
+        try {
+            repository.deleteById(id);
+        } catch (Exception e) {
+            LOGGER.error("Not found investment!");
+        }
     }
 
     public void deleteInvestment(Investment investment) {
         LOGGER.info("Deleting investment");
-        repository.delete(investment);
+        try {
+            repository.delete(investment);
+        } catch (Exception e) {
+            LOGGER.error("Not found investment!");
+        }
     }
 
     public List<Investment> getInvestments() {

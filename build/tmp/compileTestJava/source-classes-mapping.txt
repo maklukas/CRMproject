@@ -2,3 +2,15 @@ com/project/crm/TestSuite.java
  com.project.crm.TestSuite
 com/project/crm/domain/CompanyDatabaseTestSuite.java
  com.project.crm.domain.CompanyDatabaseTestSuite
+com/project/crm/domain/StatusDatabaseTestSuite.java
+ com.project.crm.domain.StatusDatabaseTestSuite
+com/project/crm/domain/DepartmentDatabaseTestSuite.java
+ com.project.crm.domain.DepartmentDatabaseTestSuite
+com/project/crm/domain/ClientDatabaseTestSuite.java
+ com.project.crm.domain.ClientDatabaseTestSuite
+com/project/crm/domain/InvestmentDatabaseTestSuite.java
+ com.project.crm.domain.InvestmentDatabaseTestSuite
+com/project/crm/domain/TaskDatabaseTestSuite.java
+ com.project.crm.domain.TaskDatabaseTestSuite
+com/project/crm/domain/UserDatabaseTestSuite.java
+ com.project.crm.domain.UserDatabaseTestSuite

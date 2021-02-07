@@ -4,8 +4,8 @@ com/project/crm/repository/TaskRepository.java
  com.project.crm.repository.TaskRepository
 com/project/crm/ApplicationRunner.java
  com.project.crm.ApplicationRunner
-com/project/crm/controller/DepartmentController.java
- com.project.crm.controller.DepartmentController
+com/project/crm/controller/TaskController.java
+ com.project.crm.controller.TaskController
 com/project/crm/repository/CompanyRepository.java
  com.project.crm.repository.CompanyRepository
 com/project/crm/repository/StatusRepository.java
@@ -16,24 +16,24 @@ com/project/crm/domain/Dto/InvestmentDto.java
  com.project.crm.domain.Dto.InvestmentDto
 com/project/crm/domain/Dto/UserDto.java
  com.project.crm.domain.Dto.UserDto
-com/project/crm/controller/StatusController.java
- com.project.crm.controller.StatusController
+com/project/crm/controller/InvestmentController.java
+ com.project.crm.controller.InvestmentController
 com/project/crm/securingweb/PassEncryptor.java
  com.project.crm.securingweb.PassEncryptor
 com/project/crm/domain/Dto/DepartmentDto.java
  com.project.crm.domain.Dto.DepartmentDto
-com/project/crm/controller/CompanyController.java
- com.project.crm.controller.CompanyController
+com/project/crm/service/StatusService.java
+ com.project.crm.service.StatusService
 com/project/crm/repository/InvestmentRepository.java
  com.project.crm.repository.InvestmentRepository
 com/project/crm/domain/Dto/ClientDto.java
  com.project.crm.domain.Dto.ClientDto
-com/project/crm/controller/InvestmentController.java
- com.project.crm.controller.InvestmentController
+com/project/crm/controller/StatusController.java
+ com.project.crm.controller.StatusController
 com/project/crm/repository/DepartmentRepository.java
  com.project.crm.repository.DepartmentRepository
-com/project/crm/controller/TaskController.java
- com.project.crm.controller.TaskController
+com/project/crm/controller/DepartmentController.java
+ com.project.crm.controller.DepartmentController
 com/project/crm/domain/Dto/TaskDto.java
  com.project.crm.domain.Dto.TaskDto
 com/project/crm/securingweb/MvcConfig.java
@@ -46,20 +46,22 @@ com/project/crm/mapper/StatusMapper.java
  com.project.crm.mapper.StatusMapper
 com/project/crm/domain/Status.java
  com.project.crm.domain.Status
-com/project/crm/service/StatusService.java
- com.project.crm.service.StatusService
+com/project/crm/service/DepartmentService.java
+ com.project.crm.service.DepartmentService
+com/project/crm/domain/Department.java
+ com.project.crm.domain.Department
+com/project/crm/controller/CompanyController.java
+ com.project.crm.controller.CompanyController
+com/project/crm/mapper/DepartmentMapper.java
+ com.project.crm.mapper.DepartmentMapper
 com/project/crm/mapper/UserMapper.java
  com.project.crm.mapper.UserMapper
 com/project/crm/domain/Client.java
  com.project.crm.domain.Client
-com/project/crm/mapper/DepartmentMapper.java
- com.project.crm.mapper.DepartmentMapper
 com/project/crm/domain/Task.java
  com.project.crm.domain.Task
 com/project/crm/controller/UserController.java
  com.project.crm.controller.UserController
-com/project/crm/domain/Department.java
- com.project.crm.domain.Department
 com/project/crm/mapper/ClientMapper.java
  com.project.crm.mapper.ClientMapper
 com/project/crm/service/CompanyService.java
@@ -70,8 +72,6 @@ com/project/crm/service/InvestmentService.java
  com.project.crm.service.InvestmentService
 com/project/crm/domain/Investment.java
  com.project.crm.domain.Investment
-com/project/crm/service/DepartmentService.java
- com.project.crm.service.DepartmentService
 com/project/crm/service/TaskService.java
  com.project.crm.service.TaskService
 com/project/crm/controller/ClientController.java

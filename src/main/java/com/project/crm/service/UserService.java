@@ -58,12 +58,20 @@ public class UserService {
 
     public void deleteUser(int id) {
         LOGGER.info("Deleting user via id");
-        repository.deleteById(id);
+        try {
+            repository.deleteById(id);
+        } catch (Exception e) {
+            LOGGER.error("Not found user!");
+        }
     }
 
     public void deleteUser(User user) {
         LOGGER.info("Deleting user");
-        repository.delete(user);
+        try {
+            repository.delete(user);
+        } catch (Exception e) {
+            LOGGER.error("Not found user!");
+        }
     }
 
     public User updateUser(User user) {

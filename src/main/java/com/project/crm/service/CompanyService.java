@@ -47,11 +47,19 @@ public class CompanyService {
 
     public void deleteCompany(int id) {
         LOGGER.info("Deleting company by id");
-        repository.deleteById(id);
+        try {
+            repository.deleteById(id);
+        } catch (Exception e) {
+            LOGGER.error("Not found company!");
+        }
     }
 
     public void deleteCompany(Company company) {
         LOGGER.info("Deleting company");
-        repository.delete(company);
+        try {
+            repository.delete(company);
+        } catch (Exception e) {
+            LOGGER.error("Not found company!");
+        }
     }
 }

@@ -27,6 +27,11 @@ public class ClientService {
         repository.deleteById(id);
     }
 
+    public void deleteClient(Client client) {
+        LOGGER.info("Deleting client");
+        repository.delete(client);
+    }
+
     public void updateClient(Client client) {
         LOGGER.info("Updating client");
         repository.save(client);

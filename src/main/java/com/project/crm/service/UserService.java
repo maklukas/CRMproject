@@ -47,11 +47,11 @@ public class UserService {
         return users;
     }
 
-    public List<User> getUserByDepartmentId(int department_id) {
+    public List<User> getUserByDepartmentId(String departmentName) {
         LOGGER.info("Getting users by department");
         List<User> users = repository.findAll()
                 .stream()
-                .filter(user -> user.getDepartmentId() == department_id)
+                .filter(user -> user.getDepartment().getName() == departmentName)
                 .collect(Collectors.toList());
         return users;
     }
@@ -59,6 +59,11 @@ public class UserService {
     public void deleteUser(int id) {
         LOGGER.info("Deleting user via id");
         repository.deleteById(id);
+    }
+
+    public void deleteUser(User user) {
+        LOGGER.info("Deleting user");
+        repository.delete(user);
     }
 
     public User updateUser(User user) {

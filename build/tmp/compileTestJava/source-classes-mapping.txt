@@ -1,6 +1,4 @@
-com/project/crm/domain/UserTest.java
- com.project.crm.domain.UserTest
-com/project/crm/encryptor/EncryptorTest.java
- com.project.crm.encryptor.EncryptorTest
-com/project/crm/controller/UserControllerTest.java
- com.project.crm.controller.UserControllerTest
+com/project/crm/TestSuite.java
+ com.project.crm.TestSuite
+com/project/crm/domain/CompanyDatabaseTestSuite.java
+ com.project.crm.domain.CompanyDatabaseTestSuite

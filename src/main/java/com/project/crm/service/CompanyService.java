@@ -46,6 +46,12 @@ public class CompanyService {
     }
 
     public void deleteCompany(int id) {
+        LOGGER.info("Deleting company by id");
         repository.deleteById(id);
+    }
+
+    public void deleteCompany(Company company) {
+        LOGGER.info("Deleting company");
+        repository.delete(company);
     }
 }

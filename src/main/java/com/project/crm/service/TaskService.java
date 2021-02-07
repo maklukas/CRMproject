@@ -1,6 +1,8 @@
 package com.project.crm.service;
 
+import com.project.crm.domain.Status;
 import com.project.crm.domain.Task;
+import com.project.crm.repository.StatusRepository;
 import com.project.crm.repository.TaskRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,6 +28,11 @@ public class TaskService {
     public void deleteTask(int id) {
         LOGGER.info("Deleting task by id");
         repository.deleteById(id);
+    }
+
+    public void deleteTask(Task task) {
+        LOGGER.info("Deleting task");
+        repository.delete(task);
     }
 
     public void updateTask(Task task) {

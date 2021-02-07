@@ -1,6 +1,6 @@
 package com.project.crm.controller;
 
-import com.project.crm.domain.DepartmentDto;
+import com.project.crm.domain.Dto.DepartmentDto;
 import com.project.crm.mapper.DepartmentMapper;
 import com.project.crm.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;

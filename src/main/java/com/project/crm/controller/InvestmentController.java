@@ -1,6 +1,6 @@
 package com.project.crm.controller;
 
-import com.project.crm.domain.InvestmentDto;
+import com.project.crm.domain.Dto.InvestmentDto;
 import com.project.crm.mapper.InvestmentMapper;
 import com.project.crm.service.InvestmentService;
 import org.springframework.beans.factory.annotation.Autowired;

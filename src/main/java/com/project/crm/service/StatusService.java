@@ -5,9 +5,11 @@ import com.project.crm.repository.StatusRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class StatusService {
 
     private static Logger LOGGER = LoggerFactory.getLogger(StatusService.class);
@@ -28,6 +30,11 @@ public class StatusService {
     public void deleteStatus(int id) {
         LOGGER.info("Deleting department by id");
         repository.deleteById(id);
+    }
+
+    public void deleteStatus(Status status) {
+        LOGGER.info("Deleting department");
+        repository.delete(status);
     }
 
     public List<Status> getStatuses() {

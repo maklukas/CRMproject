@@ -1,6 +1,6 @@
 package com.project.crm.controller;
 
-import com.project.crm.domain.StatusDto;
+import com.project.crm.domain.Dto.StatusDto;
 import com.project.crm.mapper.StatusMapper;
 import com.project.crm.service.StatusService;
 import org.springframework.beans.factory.annotation.Autowired;

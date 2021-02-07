@@ -1,6 +1,6 @@
 package com.project.crm.controller;
 
-import com.project.crm.domain.TaskDto;
+import com.project.crm.domain.Dto.TaskDto;
 import com.project.crm.mapper.TaskMapper;
 import com.project.crm.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;

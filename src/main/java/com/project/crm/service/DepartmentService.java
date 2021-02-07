@@ -32,6 +32,11 @@ public class DepartmentService {
         repository.deleteById(id);
     }
 
+    public void deleteDepartment(Department department) {
+        LOGGER.info("Deleting department");
+        repository.delete(department);
+    }
+
     public List<Department> getDepartments() {
         LOGGER.info("Fetching departments");
         return repository.findAll();

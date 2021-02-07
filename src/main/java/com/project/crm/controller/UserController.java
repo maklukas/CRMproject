@@ -1,7 +1,7 @@
 package com.project.crm.controller;
 
 import com.project.crm.domain.User;
-import com.project.crm.domain.UserDto;
+import com.project.crm.domain.Dto.UserDto;
 import com.project.crm.mapper.UserMapper;
 import com.project.crm.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,9 +42,9 @@ public class UserController {
         return mapper.mapToUserDtoList(userService.getUserByFragment(txt));
     }
 
-    @GetMapping(path = "/department/{department_id}")
-    public List<UserDto> getUserByDepartmentId(@PathVariable int department_id) {
-        return mapper.mapToUserDtoList(userService.getUserByDepartmentId(department_id));
+    @GetMapping(path = "/department/{departmentName}")
+    public List<UserDto> getUserByDepartmentId(@PathVariable String departmentName) {
+        return mapper.mapToUserDtoList(userService.getUserByDepartmentId(departmentName));
     }
 
     @DeleteMapping(path = "{/id}")

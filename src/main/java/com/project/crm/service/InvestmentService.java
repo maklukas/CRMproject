@@ -1,7 +1,9 @@
 package com.project.crm.service;
 
 import com.project.crm.domain.Investment;
+import com.project.crm.domain.Status;
 import com.project.crm.repository.InvestmentRepository;
+import com.project.crm.repository.StatusRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,11 @@ public class InvestmentService {
     public void deleteInvestment(int id) {
         LOGGER.info("Deleting investment by id");
         repository.deleteById(id);
+    }
+
+    public void deleteInvestment(Investment investment) {
+        LOGGER.info("Deleting investment");
+        repository.delete(investment);
     }
 
     public List<Investment> getInvestments() {

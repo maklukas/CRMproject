@@ -16,9 +16,6 @@ public class ClientDatabaseTestSuite {
     @Autowired
     private ServiceConnected serviceConnected;
 
-    @Autowired
-    private PassEncryptor passEncryptor;
-
     @Test
     public void shouldCreateClient() throws Throwable {
         //given
@@ -38,7 +35,7 @@ public class ClientDatabaseTestSuite {
         Assert.assertEquals(1, serviceConnected.investment.getInvestments().size());
         Assert.assertEquals(1, serviceConnected.department.getDepartments().size());
         Assert.assertEquals(1, serviceConnected.user.getUsers().size());
-        Assert.assertTrue(passEncryptor.passwordEncoder().matches("password", serviceConnected.user.getUserById(user.getId()).getPassword()));
+        Assert.assertTrue(new PassEncryptor().passwordEncoder().matches("password", serviceConnected.user.getUserById(user.getId()).getPassword()));
         //cleanup
 
         serviceConnected.client.deleteClient(client.getId());

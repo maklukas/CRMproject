@@ -20,14 +20,9 @@ public class MvcConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication().withUser("user")
-                .password(passEncryptor.passwordEncoder().encode("password"))
+                .password(new PassEncryptor().passwordEncoder().encode("password"))
                 .roles("USER");
-
     }
-
-    @Autowired
-    private PassEncryptor passEncryptor;
-
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {

@@ -2,7 +2,6 @@ package com.project.crm.service;
 
 import com.project.crm.domain.User;
 import com.project.crm.repository.UserRepository;
-import com.project.crm.securingweb.PassEncryptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +18,8 @@ public class UserService {
     @Autowired
     private UserRepository repository;
 
-    @Autowired
-    private PassEncryptor passEncryptor;
-
     public User createUser(User user) {
         LOGGER.info("Saving new user");
-        user.setPassword(passEncryptor.passwordEncoder().encode(user.getPassword()));
         return repository.save(user);
     }
 
@@ -76,7 +71,6 @@ public class UserService {
 
     public User updateUser(User user) {
         LOGGER.info("Updating user");
-        user.setPassword(passEncryptor.passwordEncoder().encode(user.getPassword()));
         return repository.save(user);
     }
 

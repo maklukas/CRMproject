@@ -2,7 +2,9 @@ package com.project.crm.controller;
 
 import com.project.crm.domain.Dto.DepartmentDto;
 import com.project.crm.mapper.DepartmentMapper;
+import com.project.crm.mapper.MapperConnected;
 import com.project.crm.service.DepartmentService;
+import com.project.crm.service.ServiceConnected;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -15,33 +17,33 @@ import java.util.List;
 public class DepartmentController {
 
     @Autowired
-    private DepartmentService service;
+    private ServiceConnected service;
 
     @Autowired
-    private DepartmentMapper mapper;
+    private MapperConnected mapper;
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public void createDepartment(@RequestBody DepartmentDto departmentDto) {
-        service.createDepartment(mapper.mapToDepartment(departmentDto));
+        service.department.createDepartment(mapper.department.mapToDepartment(departmentDto));
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public void updateDepartment(@RequestBody DepartmentDto departmentDto) {
-        service.updateDepartment(mapper.mapToDepartment(departmentDto));
+        service.department.updateDepartment(mapper.department.mapToDepartment(departmentDto));
     }
 
     @DeleteMapping(path = "/{id}")
     public void deleteDepartment(@PathVariable int id) {
-        service.deleteDepartment(id);
+        service.department.deleteDepartment(id);
     }
 
     @GetMapping
     public List<DepartmentDto> getDepartments() {
-        return mapper.mapToDepartmentDtoList(service.getDepartments());
+        return mapper.department.mapToDepartmentDtoList(service.department.getDepartments());
     }
 
     @GetMapping(path = "/{id}")
     public DepartmentDto getDepartment(@PathVariable int id) {
-        return mapper.mapToDepartmentDto(service.getDepartment(id));
+        return mapper.department.mapToDepartmentDto(service.department.getDepartment(id));
     }
 }

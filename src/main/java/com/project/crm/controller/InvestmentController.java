@@ -2,7 +2,9 @@ package com.project.crm.controller;
 
 import com.project.crm.domain.Dto.InvestmentDto;
 import com.project.crm.mapper.InvestmentMapper;
+import com.project.crm.mapper.MapperConnected;
 import com.project.crm.service.InvestmentService;
+import com.project.crm.service.ServiceConnected;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -14,38 +16,38 @@ import java.util.List;
 @CrossOrigin("*")
 public class InvestmentController {
     @Autowired
-    private InvestmentService service;
+    private ServiceConnected service;
 
     @Autowired
-    private InvestmentMapper mapper;
+    private MapperConnected mapper;
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public void createInvestment(@RequestBody InvestmentDto investmentDto) {
-        service.createInvestment(mapper.mapToInvestment(investmentDto));
+        service.investment.createInvestment(mapper.investment.mapToInvestment(investmentDto));
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public void updateInvestment(@RequestBody InvestmentDto investmentDto) {
-        service.updateInvestment(mapper.mapToInvestment(investmentDto));
+        service.investment.updateInvestment(mapper.investment.mapToInvestment(investmentDto));
     }
 
     @DeleteMapping(path = "/{id}")
     public void deleteInvestment(@PathVariable int id) {
-        service.deleteInvestment(id);
+        service.investment.deleteInvestment(id);
     }
 
     @GetMapping
     public List<InvestmentDto> getInvestments() {
-        return mapper.mapToInvestmentDtoList(service.getInvestments());
+        return mapper.investment.mapToInvestmentDtoList(service.investment.getInvestments());
     }
 
     @GetMapping (path = "/{id}")
     public InvestmentDto getInvestmentById(@PathVariable int id) {
-        return mapper.mapToInvestmentDto(service.getInvestmentById(id));
+        return mapper.investment.mapToInvestmentDto(service.investment.getInvestmentById(id));
     }
 
     @GetMapping (path = "/fragment/{txt}")
     public List<InvestmentDto> getInvestmentByFragment(@PathVariable String txt) {
-        return mapper.mapToInvestmentDtoList(service.getInvestmentByFragment(txt));
+        return mapper.investment.mapToInvestmentDtoList(service.investment.getInvestmentByFragment(txt));
     }
 }

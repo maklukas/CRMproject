@@ -1,7 +1,9 @@
 package com.project.crm.controller;
 
 import com.project.crm.domain.Dto.StatusDto;
+import com.project.crm.mapper.MapperConnected;
 import com.project.crm.mapper.StatusMapper;
+import com.project.crm.service.ServiceConnected;
 import com.project.crm.service.StatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -15,34 +17,34 @@ import java.util.List;
 public class StatusController {
 
     @Autowired
-    private StatusService service;
+    private ServiceConnected service;
 
     @Autowired
-    private StatusMapper mapper;
+    private MapperConnected mapper;
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public void createStatus(@RequestBody StatusDto departmentDto) {
-        service.createStatus(mapper.mapToStatus(departmentDto));
+        service.status.createStatus(mapper.status.mapToStatus(departmentDto));
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public void updateStatus(@RequestBody StatusDto departmentDto) {
-        service.updateStatus(mapper.mapToStatus(departmentDto));
+        service.status.updateStatus(mapper.status.mapToStatus(departmentDto));
     }
 
     @DeleteMapping(path = "/{id}")
     public void deleteStatus(@PathVariable int id) {
-        service.deleteStatus(id);
+        service.status.deleteStatus(id);
     }
 
     @GetMapping
     public List<StatusDto> getStatuses() {
-        return mapper.mapToStatusDtoList(service.getStatuses());
+        return mapper.status.mapToStatusDtoList(service.status.getStatuses());
     }
 
     @GetMapping(path = "/{id}")
     public StatusDto getStatus(@PathVariable int id) {
-        return mapper.mapToStatusDto(service.getStatus(id));
+        return mapper.status.mapToStatusDto(service.status.getStatus(id));
     }
 
 }

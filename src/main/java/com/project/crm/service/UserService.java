@@ -36,17 +36,18 @@ public class UserService {
 
     public List<User> getUserByFragment(String txt) {
         LOGGER.info("Getting users by text fragment");
-        List<User> users = repository.findAll()
-                .stream().filter(user -> user.getFirstname().contains(txt) || user.getLastname().contains(txt) || user.getUsername().contains(txt))
+        return repository.findAll()
+                .stream().filter(user -> user.getFirstname().contains(txt)
+                        || user.getLastname().contains(txt)
+                        || user.getUsername().contains(txt))
                 .collect(Collectors.toList());
-        return users;
     }
 
-    public List<User> getUserByDepartmentId(String departmentName) {
+    public List<User> getUserByDepartment(String departmentName) {
         LOGGER.info("Getting users by department");
         List<User> users = repository.findAll()
                 .stream()
-                .filter(user -> user.getDepartment().getName() == departmentName)
+                .filter(user -> user.getDepartment().getName().equals(departmentName))
                 .collect(Collectors.toList());
         return users;
     }

@@ -1,9 +1,7 @@
 package com.project.crm.controller;
 
 import com.project.crm.domain.Dto.ClientDto;
-import com.project.crm.mapper.ClientMapper;
 import com.project.crm.mapper.MapperConnected;
-import com.project.crm.service.ClientService;
 import com.project.crm.service.ServiceConnected;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -17,10 +15,10 @@ import java.util.List;
 public class ClientController {
 
     @Autowired
-    ServiceConnected service;
+    private ServiceConnected service;
 
     @Autowired
-    MapperConnected mapper;
+    private MapperConnected mapper;
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public void createClient(@RequestBody ClientDto clientDto) {

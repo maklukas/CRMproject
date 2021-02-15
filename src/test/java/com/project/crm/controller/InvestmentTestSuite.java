@@ -1,6 +1,7 @@
 package com.project.crm.controller;
 
 import com.google.gson.Gson;
+import com.project.crm.domain.Dto.DepartmentDto;
 import com.project.crm.domain.Dto.InvestmentDto;
 import com.project.crm.domain.Dto.StatusDto;
 import com.project.crm.domain.Dto.UserDto;
@@ -94,15 +95,18 @@ public class InvestmentTestSuite {
     @Test
     public void shouldGetInvestments() throws Exception {
         //given
+        DepartmentDto departmentDto = new DepartmentDto(1, "TestDep", new ArrayList<>());
+        UserDto user = new UserDto(1, "user", "fn", "ln", departmentDto, new ArrayList<>(), new ArrayList<>());
+        StatusDto status = new StatusDto(1, "StTest", new ArrayList<>(), new ArrayList<>());
         List<InvestmentDto> investments = new ArrayList<>();
         investments.add(new InvestmentDto(
                 1,
                 "Test Investment",
                 "Test Address",
-                null,
+                user,
                 new ArrayList<>(),
                 new ArrayList<>(),
-                null
+                status
         ));
 
         when(controller.getInvestments()).thenReturn(investments);
@@ -112,7 +116,14 @@ public class InvestmentTestSuite {
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$[0].id", is(1)))
                 .andExpect(jsonPath("$[0].name", is("Test Investment")))
-                .andExpect(jsonPath("$[0].address", is("Test Address")));
+                .andExpect(jsonPath("$[0].address", is("Test Address")))
+                .andExpect(jsonPath("$[0].registeredBy.id", is(1)))
+                .andExpect(jsonPath("$[0].registeredBy.username", is("user")))
+                .andExpect(jsonPath("$[0].registeredBy.firstname", is("fn")))
+                .andExpect(jsonPath("$[0].registeredBy.department.id", is(1)))
+                .andExpect(jsonPath("$[0].registeredBy.department.name", is("TestDep")))
+                .andExpect(jsonPath("$[0].status.id", is(1)))
+                .andExpect(jsonPath("$[0].status.name", is("StTest")));
     }
 
     @Test

@@ -2,90 +2,36 @@ package com.project.crm.mapper;
 
 import com.project.crm.domain.Task;
 import com.project.crm.domain.Dto.TaskDto;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
 public class TaskMapper {
 
-    private static Logger LOGGER = LoggerFactory.getLogger(TaskMapper.class);
-
     @Autowired
-    private MapperConnected mapper;
+    private ModelMapper modelMapper;
 
     public Task mapToTask(TaskDto task) {
-        if (task == null) {
-            LOGGER.error("Mapping filed..");
-            return new Task();
-        } else {
-            return new Task(
-                    task.getId(),
-                    mapper.user.mapToUserList(task.getUsers()),
-                    mapper.status.mapToStatus(task.getStatus()),
-                    task.getTitle(),
-                    task.getDescription(),
-                    task.getCreationTime(),
-                    task.getRealizationTime()
-            );
-        }
+        return modelMapper.map(task, Task.class);
     }
 
     public TaskDto mapToTaskDto(Task task) {
-        if (task == null) {
-            LOGGER.error("Mapping filed..");
-            return new TaskDto();
-        } else {
-            return new TaskDto(
-                    task.getId(),
-                    mapper.user.mapToUserDtoList(task.getUsers()),
-                    mapper.status.mapToStatusDto(task.getStatus()),
-                    task.getTitle(),
-                    task.getDescription(),
-                    task.getCreationTime(),
-                    task.getRealizationTime()
-            );
-        }
-    }
-
-    public List<TaskDto> mapToTaskDtoList(List<Task> tasks) {
-        if (tasks == null) {
-            LOGGER.error("Mapping filed..");
-            return new ArrayList<>();
-        } else {
-            return tasks.stream()
-                    .map(task -> new TaskDto(
-                            task.getId(),
-                            mapper.user.mapToUserDtoList(task.getUsers()),
-                            mapper.status.mapToStatusDto(task.getStatus()),
-                            task.getTitle(),
-                            task.getDescription(),
-                            task.getCreationTime(),
-                            task.getRealizationTime()
-                    )).collect(Collectors.toList());
-        }
+        return modelMapper.map(task, TaskDto.class);
     }
 
     public List<Task> mapToTaskList(List<TaskDto> tasks) {
-        if (tasks == null) {
-            LOGGER.error("Mapping filed..");
-            return new ArrayList<>();
-        } else {
-            return tasks.stream()
-                    .map(task -> new Task(
-                            task.getId(),
-                            mapper.user.mapToUserList(task.getUsers()),
-                            mapper.status.mapToStatus(task.getStatus()),
-                            task.getTitle(),
-                            task.getDescription(),
-                            task.getCreationTime(),
-                            task.getRealizationTime()
-                    )).collect(Collectors.toList());
-        }
+        return tasks.stream()
+                .map(task -> modelMapper.map(task, Task.class))
+                .collect(Collectors.toList());
+    }
+
+    public List<TaskDto> mapToTaskDtoList(List<Task> tasks) {
+        return tasks.stream()
+                .map(task -> modelMapper.map(task, TaskDto.class))
+                .collect(Collectors.toList());
     }
 }

@@ -1,5 +1,6 @@
 package com.project.crm.mapper;
 
+import com.google.gson.Gson;
 import com.project.crm.domain.*;
 import com.project.crm.domain.Dto.*;
 import org.junit.Assert;
@@ -15,6 +16,7 @@ import java.util.List;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class MapperTestSuite {
+
     @Autowired
     private MapperConnected mapper;
 
@@ -33,6 +35,8 @@ public class MapperTestSuite {
         Client client = new Client(1, "Lukasz", "Makuch", 880700290, companies, investments);
         //when
         ClientDto clientDto = mapper.client.mapToClientDto(client);
+
+        System.out.println(new Gson().toJson(clientDto));
         //then
         Assert.assertEquals(client.getId(), clientDto.getId());
         Assert.assertEquals(client.getInvestments().get(0).getName(), clientDto.getInvestments().get(0).getName());
@@ -57,6 +61,7 @@ public class MapperTestSuite {
         ClientDto clientDto = new ClientDto(1, "Lukasz", "Makuch", 880700290, companies, investments);
         //when
         Client client = mapper.client.mapToClient(clientDto);
+
         //then
         Assert.assertEquals(client.getId(), clientDto.getId());
         Assert.assertEquals(client.getInvestments().get(0).getName(), clientDto.getInvestments().get(0).getName());

@@ -41,9 +41,7 @@ public class CompanyTestSuite {
                 1,
                 "Test company",
                 "Test address",
-                "TE154454566",
-                new ArrayList<>(),
-                new ArrayList<>()
+                "TE154454566"
         );
         doNothing().when(controller).createCompany(company);
         String context = new Gson().toJson(company);
@@ -60,9 +58,7 @@ public class CompanyTestSuite {
                 1,
                 "Test company",
                 "Test address",
-                "TE154454566",
-                new ArrayList<>(),
-                new ArrayList<>()
+                "TE154454566"
         ));
         when(controller.getCompanies()).thenReturn(companies);
         //when & then
@@ -82,9 +78,7 @@ public class CompanyTestSuite {
                 1,
                 "Test company",
                 "Test address",
-                "TE154454566",
-                new ArrayList<>(),
-                new ArrayList<>()
+                "TE154454566"
         );
         int id = 1;
         when(controller.getCompanyById(1)).thenReturn(company);
@@ -105,9 +99,7 @@ public class CompanyTestSuite {
                 1,
                 "Test company",
                 "Test address",
-                "TE154454566",
-                new ArrayList<>(),
-                new ArrayList<>()
+                "TE154454566"
         ));
         String fragment = "comp";
         when(controller.getCompaniesByFragment(fragment)).thenReturn(companies);
@@ -128,9 +120,7 @@ public class CompanyTestSuite {
                 1,
                 "Test company",
                 "Test address",
-                "TE154454566",
-                new ArrayList<>(),
-                new ArrayList<>()
+                "TE154454566"
         );
         doNothing().when(controller).updateCompany(company);
         String context = new Gson().toJson(company);
@@ -146,9 +136,7 @@ public class CompanyTestSuite {
                 1,
                 "Test company",
                 "Test address",
-                "TE154454566",
-                new ArrayList<>(),
-                new ArrayList<>()
+                "TE154454566"
         );
         int id = 1;
         doNothing().when(controller).deleteCompany(id);

@@ -37,7 +37,7 @@ public class DepartmentTestSuite {
     @Test
     public void shouldCreateDepartment() throws Exception {
         //given
-        DepartmentDto department = new DepartmentDto(1, "NewTest", new ArrayList<>());
+        DepartmentDto department = new DepartmentDto(1, "NewTest");
         doNothing().when(controller).createDepartment(department);
         String context = new Gson().toJson(department);
         //when & then
@@ -48,7 +48,7 @@ public class DepartmentTestSuite {
     @Test
     public void shouldUpdateDepartment() throws Exception {
         //given
-        DepartmentDto department = new DepartmentDto(1, "NewTest", new ArrayList<>());
+        DepartmentDto department = new DepartmentDto(1, "NewTest");
         doNothing().when(controller).updateDepartment(department);
         String context = new Gson().toJson(department);
         //when & then
@@ -59,7 +59,7 @@ public class DepartmentTestSuite {
     @Test
     public void shouldDeleteDepartment() throws Exception {
         //given
-        DepartmentDto department = new DepartmentDto(1, "NewTest", new ArrayList<>());
+        DepartmentDto department = new DepartmentDto(1, "NewTest");
         int id = 1;
         doNothing().when(controller).deleteDepartment(id);
         //when & then
@@ -71,7 +71,7 @@ public class DepartmentTestSuite {
     public void shouldGetDepartments() throws Exception {
         //given
         List<DepartmentDto> departments = new ArrayList<>();
-        departments.add(new DepartmentDto(1, "NewTest", new ArrayList<>()));
+        departments.add(new DepartmentDto(1, "NewTest"));
         when(controller.getDepartments()).thenReturn(departments);
         //when & then
         mockMvc.perform(get("/v1/departments").contentType(MediaType.APPLICATION_JSON))
@@ -84,7 +84,7 @@ public class DepartmentTestSuite {
     @Test
     public void shouldGetDepartment() throws Exception {
         //given
-        DepartmentDto department = new DepartmentDto(1, "NewTest", new ArrayList<>());
+        DepartmentDto department = new DepartmentDto(1, "NewTest");
         int id = 1;
         when(controller.getDepartment(id)).thenReturn(department);
         //when & then

@@ -82,9 +82,7 @@ public class UserTestSuite {
                 "username",
                 "firTest",
                 "laTest",
-                null,
-                new ArrayList<>(),
-                new ArrayList<>());
+                null);
         int id = 1;
         doNothing().when(controller).deleteUser(id);
         //when & then
@@ -100,9 +98,7 @@ public class UserTestSuite {
                 "userTest",
                 "firTest",
                 "laTest",
-                null,
-                new ArrayList<>(),
-                new ArrayList<>());
+                null);
         int id = 1;
         when(controller.getUser(id)).thenReturn(user);
         //when & then
@@ -123,9 +119,7 @@ public class UserTestSuite {
                 "userTest",
                 "firTest",
                 "laTest",
-                null,
-                new ArrayList<>(),
-                new ArrayList<>()));
+                null));
         when(controller.getUsers()).thenReturn(users);
         //when & then
         mockMvc.perform(get("/v1/users").contentType(MediaType.APPLICATION_JSON_VALUE))
@@ -146,9 +140,7 @@ public class UserTestSuite {
                 "userTest",
                 "firTest",
                 "laTest",
-                null,
-                new ArrayList<>(),
-                new ArrayList<>()));
+                null));
         String fragment = "Tes";
         when(controller.getUserByName(fragment)).thenReturn(users);
         //when & then
@@ -165,15 +157,13 @@ public class UserTestSuite {
     public void shouldGetDepartmentsUsers() throws Exception {
         //given
         List<UserDto> users = new ArrayList<>();
-        DepartmentDto department = new DepartmentDto(1, "DepTest", new ArrayList<>(users));
+        DepartmentDto department = new DepartmentDto(1, "DepTest");
         users.add(new UserDto(
                 1,
                 "userTest",
                 "firTest",
                 "laTest",
-                department,
-                new ArrayList<>(),
-                new ArrayList<>()));
+                department));
         String fragment = "DepTest";
         when(controller.getUserByDepartment(fragment)).thenReturn(users);
         //when & then

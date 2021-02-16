@@ -1,15 +1,7 @@
 package com.project.crm.controller;
 
 import com.google.gson.Gson;
-import com.project.crm.ApplicationRunner;
-import com.project.crm.domain.Client;
 import com.project.crm.domain.Dto.ClientDto;
-import com.project.crm.domain.Dto.CompanyDto;
-import com.project.crm.domain.Dto.InvestmentDto;
-import com.project.crm.mapper.MapperConnected;
-import com.project.crm.securingweb.MvcConfig;
-import com.project.crm.securingweb.PassEncryptor;
-import com.project.crm.service.ServiceConnected;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +9,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -52,7 +43,6 @@ public class ClientTestSuite {
                 "Lukasz",
                 "Makuch",
                 880700290,
-                new ArrayList<>(),
                 new ArrayList<>()
         );
         doNothing().when(controller).createClient(client);
@@ -71,7 +61,6 @@ public class ClientTestSuite {
                 "Lukasz",
                 "Makuch",
                 880700290,
-                new ArrayList<>(),
                 new ArrayList<>())
         );
         when(controller.getClients()).thenReturn(clients);
@@ -93,7 +82,6 @@ public class ClientTestSuite {
                 "Lukasz",
                 "Makuch",
                 880700290,
-                new ArrayList<>(),
                 new ArrayList<>()
         );
 
@@ -117,7 +105,6 @@ public class ClientTestSuite {
                 "Lukasz",
                 "Makuch",
                 880700290,
-                new ArrayList<>(),
                 new ArrayList<>()
         );
         doNothing().when(controller).deleteClient(1);
@@ -135,7 +122,6 @@ public class ClientTestSuite {
                 "Lukasz",
                 "Makuch",
                 880700290,
-                new ArrayList<>(),
                 new ArrayList<>()
         );
         doNothing().when(controller).updateClient(client);
@@ -156,7 +142,6 @@ public class ClientTestSuite {
                 "Lukasz",
                 "Makuch",
                 880700290,
-                new ArrayList<>(),
                 new ArrayList<>())
         );
         String txt = "Mak";

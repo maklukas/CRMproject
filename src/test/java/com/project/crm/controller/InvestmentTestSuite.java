@@ -95,9 +95,9 @@ public class InvestmentTestSuite {
     @Test
     public void shouldGetInvestments() throws Exception {
         //given
-        DepartmentDto departmentDto = new DepartmentDto(1, "TestDep", new ArrayList<>());
-        UserDto user = new UserDto(1, "user", "fn", "ln", departmentDto, new ArrayList<>(), new ArrayList<>());
-        StatusDto status = new StatusDto(1, "StTest", new ArrayList<>(), new ArrayList<>());
+        DepartmentDto departmentDto = new DepartmentDto(1, "TestDep");
+        UserDto user = new UserDto(1, "user", "fn", "ln", departmentDto);
+        StatusDto status = new StatusDto(1, "StTest");
         List<InvestmentDto> investments = new ArrayList<>();
         investments.add(new InvestmentDto(
                 1,

@@ -37,7 +37,7 @@ public class StatusTestSuite {
     @Test
     public void shouldCreateStatus() throws Exception {
         //given
-        StatusDto status = new StatusDto(1, "NewStatus", new ArrayList<>(), new ArrayList<>());
+        StatusDto status = new StatusDto(1, "NewStatus");
         doNothing().when(controller).createStatus(status);
         String context = new Gson().toJson(status);
         //when & then
@@ -48,7 +48,7 @@ public class StatusTestSuite {
     @Test
     public void shouldUpdateStatus() throws Exception {
         //given
-        StatusDto status = new StatusDto(1, "NewStatus", new ArrayList<>(), new ArrayList<>());
+        StatusDto status = new StatusDto(1, "NewStatus");
         doNothing().when(controller).updateStatus(status);
         String context = new Gson().toJson(status);
         //when & then
@@ -59,7 +59,7 @@ public class StatusTestSuite {
     @Test
     public void shouldDeleteStatus() throws Exception {
         //given
-        StatusDto status = new StatusDto(1, "NewStatus", new ArrayList<>(), new ArrayList<>());
+        StatusDto status = new StatusDto(1, "NewStatus");
         int id = 1;
         doNothing().when(controller).deleteStatus(id);
         //when & then
@@ -72,7 +72,7 @@ public class StatusTestSuite {
     public void shouldGetStatuses() throws Exception {
         //given
         List<StatusDto> statuses = new ArrayList<>();
-        statuses.add(new StatusDto(1, "NewStatus", new ArrayList<>(), new ArrayList<>()));
+        statuses.add(new StatusDto(1, "NewStatus"));
         when(controller.getStatuses()).thenReturn(statuses);
         //when & then
         mockMvc.perform(get("/v1/statuses")
@@ -86,7 +86,7 @@ public class StatusTestSuite {
     @Test
     public void shouldGetStatus() throws Exception {
         //given
-        StatusDto status = new StatusDto(1, "NewStatus", new ArrayList<>(), new ArrayList<>());
+        StatusDto status = new StatusDto(1, "NewStatus");
         int id = 1;
         when(controller.getStatus(id)).thenReturn(status);
         //when & then

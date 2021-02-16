@@ -13,7 +13,6 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -97,8 +96,8 @@ public class TaskTestSuite {
     @Test
     public void shouldGetTaskById() throws Exception {
         //given
-        StatusDto status = new StatusDto(1, "StTest", new ArrayList<>(), new ArrayList<>());
-        LocalDateTime tera = LocalDateTime.of(2021, 2, 10, 0,0, 0);
+        StatusDto status = new StatusDto(1, "StTest");
+        LocalDateTime tera = LocalDateTime.of(2021, 1, 12, 12,15);
         TaskDto task = new TaskDto(
                 1,
                 new ArrayList<>(),
@@ -118,8 +117,8 @@ public class TaskTestSuite {
                 .andExpect(jsonPath("$.description", is("Test Description")))
                 .andExpect(jsonPath("$.status.id", is(1)))
                 .andExpect(jsonPath("$.status.name", is("StTest")))
-                .andExpect(jsonPath("$.creationTime", contains("2021-02-10T00:00:00")))
-                .andExpect(jsonPath("$.realisationTime", contains(tera.plusDays(1))));
+                .andExpect(jsonPath("$.creationTime", is("2021-01-12T12:15:00")))
+                .andExpect(jsonPath("$.realizationTime", is("2021-01-13T12:15:00")));
 
     }
 
@@ -152,7 +151,7 @@ public class TaskTestSuite {
     @Test
     public void shouldGetTasksByFragment() throws Exception {
         //given
-        LocalDateTime tera = LocalDateTime.now();
+        LocalDateTime tera = LocalDateTime.of(2021,1,12,12,15);
         List<TaskDto> tasks = new ArrayList<>();
         tasks.add(new TaskDto(
                 1,
@@ -171,8 +170,8 @@ public class TaskTestSuite {
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$[0].id", is(1)))
                 .andExpect(jsonPath("$[0].title", is("Test Title")))
-                .andExpect(jsonPath("$[0].description", is("Test Description")));
-//                .andExpect(jsonPath("$.creationTime", is("2021-02-10T17:32:30.0823494")))
-//                .andExpect(jsonPath("$.realizationTime", is("2021-02-11T17:32:30.0823494")));
+                .andExpect(jsonPath("$[0].description", is("Test Description")))
+                .andExpect(jsonPath("$[0].creationTime", is("2021-01-12T12:15:00")))
+                .andExpect(jsonPath("$[0].realizationTime", is("2021-01-13T12:15:00")));
     }
 }

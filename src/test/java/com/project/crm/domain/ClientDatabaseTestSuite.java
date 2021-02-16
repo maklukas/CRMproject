@@ -45,11 +45,6 @@ public class ClientDatabaseTestSuite {
         serviceConnected.status.deleteStatus(status.getId());
         serviceConnected.investment.deleteInvestment(investment.getId());
 
-        Assert.assertEquals(0, serviceConnected.client.getClients().size());
-        Assert.assertEquals(0, serviceConnected.company.getCompanies().size());
-        Assert.assertEquals(0, serviceConnected.investment.getInvestments().size());
-        Assert.assertEquals(0, serviceConnected.department.getDepartments().size());
-        Assert.assertEquals(0, serviceConnected.user.getUsers().size());
 
     }
 

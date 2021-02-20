@@ -23,14 +23,16 @@ public class UserDatabaseTestSuite {
         //given
         Department department = new Department("Dział wdrożeń");
         User user = new User("login", "password", "fn", "ln", department);
+        User user2 = new User("login", "otherPass123", "first name", "last name", department);
         //when
         service.user.createUser(user);
+        service.user.createUser(user2);
         //then
         Assert.assertEquals(1, service.department.getDepartments().size());
         Assert.assertEquals(1, service.user.getUsers().size());
         //cleanup
-        service.department.deleteDepartment(department.getId());
-        service.user.deleteUser(user.getId());
+//        service.department.deleteDepartment(department.getId());
+//        service.user.deleteUser(user.getId());
     }
 
 }

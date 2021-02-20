@@ -32,8 +32,8 @@ dependencies {
    // implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
     implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.3.9'
-
-
+    compile group: 'io.springfox', name: 'springfox-swagger2', version: '3.0.0'
+    compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
 }
 
 test {

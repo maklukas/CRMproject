@@ -32,4 +32,5 @@ public class MvcConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .httpBasic();
     }
+
 }

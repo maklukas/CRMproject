@@ -1,8 +1,8 @@
 package com.project.crm.domain;
 
-import com.project.crm.securingweb.PassEncryptor;
 import com.sun.istack.NotNull;
 import lombok.*;
+import org.hibernate.annotations.NaturalId;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 import org.slf4j.Logger;
@@ -12,16 +12,15 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
-@Entity(name = "users")
+@Data
 @NoArgsConstructor
-@Setter
+@Entity(name = "users")
 public class User {
 
     public User(int id, String username, String password, String firstname, String lastname, Department department, List<Investment> investments, List<Task> tasks) {
         this.id = id;
         this.username = username;
-        this.password = new PassEncryptor().passwordEncoder().encode(password);
+        this.password = password;
         this.firstname = firstname;
         this.lastname = lastname;
         this.department = department;
@@ -31,7 +30,7 @@ public class User {
 
     public User(String username, String password, String firstname, String lastname, Department department) {
         this.username = username;
-        this.password = new PassEncryptor().passwordEncoder().encode(password);
+        this.password = password;
         this.firstname = firstname;
         this.lastname = lastname;
         this.department = department;
@@ -48,7 +47,7 @@ public class User {
     private int id;
 
     @NotNull
-    @Column(unique = true)
+    @NaturalId
     private String username;
 
     @NotNull
@@ -84,3 +83,5 @@ public class User {
     }
 
 }
+
+

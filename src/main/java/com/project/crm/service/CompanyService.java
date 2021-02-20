@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.toList;
+
 @Service
 public class CompanyService {
 
@@ -25,12 +27,27 @@ public class CompanyService {
 
     public void createCompany(Company company) {
         LOGGER.info("Adding company");
-        repository.save(company);
+        boolean result = repository.findAll().stream()
+                .filter(company1 -> company1.getTaxNumber().equals(company.getTaxNumber()))
+                .collect(toList()).size() == 0;
+        if (result) {
+            repository.save(company);
+        } else {
+            LOGGER.error("Client with the tax number already exists");
+        }
     }
 
     public void updateCompany(Company company) {
         LOGGER.info("Updating company");
-        repository.save(company);
+        boolean result = repository.findAll().stream()
+                .filter(company1 -> company1.getTaxNumber().equals(company.getTaxNumber())
+                        && company1.getId() != company.getId())
+                .collect(toList()).size() == 0;
+        if (result) {
+            repository.save(company);
+        } else {
+            LOGGER.error("Client with the tax number already exists");
+        }
     }
 
     public Company getCompanyById(int id) {
@@ -42,7 +59,7 @@ public class CompanyService {
         LOGGER.info("Getting company by fragment");
         return repository.findAll().stream()
                 .filter(company -> company.getAddress().contains(txt) || company.getName().contains(txt) || company.getTaxNumber().contains(txt))
-                .collect(Collectors.toList());
+                .collect(toList());
     }
 
     public void deleteCompany(int id) {

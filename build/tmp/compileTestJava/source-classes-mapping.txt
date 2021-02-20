@@ -1,21 +1,21 @@
+com/project/crm/TestSuite.java
+ com.project.crm.TestSuite
 com/project/crm/controller/InvestmentTestSuite.java
  com.project.crm.controller.InvestmentTestSuite
 com/project/crm/domain/UserDatabaseTestSuite.java
  com.project.crm.domain.UserDatabaseTestSuite
 com/project/crm/domain/CompanyDatabaseTestSuite.java
  com.project.crm.domain.CompanyDatabaseTestSuite
-com/project/crm/controller/TaskTestSuite.java
- com.project.crm.controller.TaskTestSuite
+com/project/crm/mapper/MapperTestSuite.java
+ com.project.crm.mapper.MapperTestSuite
 com/project/crm/controller/DepartmentTestSuite.java
  com.project.crm.controller.DepartmentTestSuite
 com/project/crm/controller/CompanyTestSuite.java
  com.project.crm.controller.CompanyTestSuite
-com/project/crm/TestSuite.java
- com.project.crm.TestSuite
 com/project/crm/domain/StatusDatabaseTestSuite.java
  com.project.crm.domain.StatusDatabaseTestSuite
-com/project/crm/domain/TaskDatabaseTestSuite.java
- com.project.crm.domain.TaskDatabaseTestSuite
+com/project/crm/controller/TaskTestSuite.java
+ com.project.crm.controller.TaskTestSuite
 com/project/crm/controller/UserTestSuite.java
  com.project.crm.controller.UserTestSuite
 com/project/crm/domain/DepartmentDatabaseTestSuite.java
@@ -28,5 +28,5 @@ com/project/crm/controller/StatusTestSuite.java
  com.project.crm.controller.StatusTestSuite
 com/project/crm/domain/InvestmentDatabaseTestSuite.java
  com.project.crm.domain.InvestmentDatabaseTestSuite
-com/project/crm/mapper/MapperTestSuite.java
- com.project.crm.mapper.MapperTestSuite
+com/project/crm/domain/TaskDatabaseTestSuite.java
+ com.project.crm.domain.TaskDatabaseTestSuite

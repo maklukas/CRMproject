@@ -1,5 +1,6 @@
 package com.project.crm.domain;
 
+import com.project.crm.repository.DepartmentRepository;
 import com.project.crm.service.ServiceConnected;
 import org.junit.Assert;
 import org.junit.Test;
@@ -32,4 +33,6 @@ public class DepartmentDatabaseTestSuite {
         service.department.deleteDepartment(department2.getId());
         service.department.deleteDepartment(department3.getId());
     }
+
+
 }

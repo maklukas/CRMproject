@@ -1,10 +1,8 @@
 package com.project.crm.domain;
 
 import com.sun.istack.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.annotations.NaturalId;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 
@@ -12,9 +10,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
-@Setter
-@AllArgsConstructor
+@Data
 @NoArgsConstructor
 @Entity(name = "statuses")
 public class Status {
@@ -31,7 +27,7 @@ public class Status {
     @NotNull
     private int id;
 
-    @Column(unique = true)
+    @NaturalId
     private String name;
 
     @OneToMany(mappedBy = "status")

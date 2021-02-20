@@ -2,6 +2,7 @@ package com.project.crm.service;
 
 import com.project.crm.domain.User;
 import com.project.crm.repository.UserRepository;
+import com.project.crm.securingweb.PassEncryptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 @Service
 public class UserService {
@@ -18,9 +21,17 @@ public class UserService {
     @Autowired
     private UserRepository repository;
 
-    public User createUser(User user) {
+    public void createUser(User user) {
         LOGGER.info("Saving new user");
-        return repository.save(user);
+        boolean result = repository.findAll().stream()
+                .filter(user1 -> user1.getUsername().equals(user.getUsername()))
+                .collect(toList()).size() == 0;
+        if (result) {
+            user.setPassword(new PassEncryptor().passwordEncoder().encode(user.getPassword()));
+            repository.save(user);
+        } else {
+            LOGGER.error("User with the username already exists.");
+        }
     }
 
     public List<User> getUsers() {
@@ -40,7 +51,7 @@ public class UserService {
                 .stream().filter(user -> user.getFirstname().contains(txt)
                         || user.getLastname().contains(txt)
                         || user.getUsername().contains(txt))
-                .collect(Collectors.toList());
+                .collect(toList());
     }
 
     public List<User> getUserByDepartment(String departmentName) {
@@ -48,7 +59,7 @@ public class UserService {
         List<User> users = repository.findAll()
                 .stream()
                 .filter(user -> user.getDepartment().getName().equals(departmentName))
-                .collect(Collectors.toList());
+                .collect(toList());
         return users;
     }
 
@@ -70,9 +81,20 @@ public class UserService {
         }
     }
 
-    public User updateUser(User user) {
+    public void updateUser(User user) {
         LOGGER.info("Updating user");
-        return repository.save(user);
+        boolean result = repository.findAll().stream()
+                .filter(user1 -> user1.getUsername().equals(user.getUsername())
+                        && user1.getId() != user.getId())
+                .collect(toList()).size() == 0;
+        if (result) {
+            if (user.getPassword() != null) {
+                user.setPassword(new PassEncryptor().passwordEncoder().encode(user.getPassword()));
+            }
+            repository.save(user);
+        } else {
+            LOGGER.error("User with the username already exists.");
+        }
     }
 
 

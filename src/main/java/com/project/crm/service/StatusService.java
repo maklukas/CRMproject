@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static java.util.stream.Collectors.toList;
+
 @Service
 public class StatusService {
 
@@ -22,7 +24,7 @@ public class StatusService {
 
         boolean result = repository.findAll().stream()
                 .filter(status1 -> status1.getName().equals(status.getName()))
-                .count() == 0;
+                .collect(toList()).size() == 0;
 
         if (result) {
             repository.save(status);
@@ -35,8 +37,9 @@ public class StatusService {
         LOGGER.info("Updating status");
 
         boolean result = repository.findAll().stream()
-                .filter(status1 -> status1.getName().equals(status.getName()))
-                .count() == 0;
+                .filter(status1 -> status1.getName().equals(status.getName())
+                        && status1.getId() != status.getId())
+                .collect(toList()).size() == 0;
 
         if (result) {
             repository.save(status);

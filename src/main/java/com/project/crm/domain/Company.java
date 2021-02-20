@@ -2,6 +2,7 @@ package com.project.crm.domain;
 
 import com.sun.istack.NotNull;
 import lombok.*;
+import org.hibernate.annotations.NaturalId;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 import org.slf4j.Logger;
@@ -11,9 +12,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
-@Setter
-@AllArgsConstructor
+@Data
 @NoArgsConstructor
 @Entity(name = "companies")
 public class Company {
@@ -39,6 +38,7 @@ public class Company {
     private String address;
 
     @Column(name = "tax_number")
+    @NaturalId
     private String taxNumber;
 
     @ManyToMany(mappedBy = "companies")

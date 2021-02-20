@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collector;
+
+import static java.util.stream.Collectors.toList;
 
 @Service
 public class DepartmentService {
@@ -19,11 +22,9 @@ public class DepartmentService {
 
     public void createDepartment(Department department) {
         LOGGER.info("Adding department");
-
         boolean result = repository.findAll().stream()
                 .filter(department1 -> department1.getName().equals(department.getName()))
-                .count() == 0;
-
+                .collect(toList()).size() == 0;
         if (result) {
             repository.save(department);
         } else {
@@ -34,8 +35,9 @@ public class DepartmentService {
     public void updateDepartment(Department department) {
         LOGGER.info("Updating department");
         boolean result = repository.findAll().stream()
-                .filter(department1 -> department1.getName().equals(department.getName()))
-                .count() == 0;
+                .filter(department1 -> department1.getName().equals(department.getName())
+                        && department1.getId() != department.getId())
+                .collect(toList()).size() == 0;
 
         if (result) {
             repository.save(department);

@@ -19,11 +19,14 @@ public class CompanyDatabaseTestSuite {
     public void shouldCreateCompany() {
         //given
         Company company = new Company("Test Company SA", "Test Addres 33", "TX1234555");
+        Company company2 = new Company("Test ING", "Addres other 22", "TX1234555");
         //when
         service.company.createCompany(company);
+        service.company.createCompany(company2);
         //then
         Assert.assertEquals(1, service.company.getCompanies().size());
         //cleanUp
         service.company.deleteCompany(company.getId());
+        service.company.deleteCompany(company2.getId());
     }
 }

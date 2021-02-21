@@ -2,7 +2,6 @@ package com.project.crm.domain;
 
 import com.sun.istack.NotNull;
 import lombok.*;
-import org.hibernate.annotations.NaturalId;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 import org.slf4j.Logger;
@@ -29,7 +28,7 @@ public class Company {
 
     @NotNull
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "company_id")
     private int id;
 
@@ -37,8 +36,7 @@ public class Company {
 
     private String address;
 
-    @Column(name = "tax_number")
-    @NaturalId
+    @Column(name = "tax_number", unique = true)
     private String taxNumber;
 
     @ManyToMany(mappedBy = "companies")

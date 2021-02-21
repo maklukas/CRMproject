@@ -56,8 +56,8 @@ com/project/crm/mapper/MapperConnected.java
  com.project.crm.mapper.MapperConnected
 com/project/crm/domain/Task.java
  com.project.crm.domain.Task
-com/project/crm/controller/UserController.java
- com.project.crm.controller.UserController
+com/project/crm/service/ClientService.java
+ com.project.crm.service.ClientService
 com/project/crm/domain/Department.java
  com.project.crm.domain.Department
 com/project/crm/mapper/ClientMapper.java
@@ -82,15 +82,15 @@ com/project/crm/domain/Company.java
  com.project.crm.domain.Company
 com/project/crm/mapper/TaskMapper.java
  com.project.crm.mapper.TaskMapper
-com/project/crm/service/ServiceConnected.java
- com.project.crm.service.ServiceConnected
-com/project/crm/mapper/InvestmentMapper.java
- com.project.crm.mapper.InvestmentMapper
-com/project/crm/service/UserService.java
- com.project.crm.service.UserService
-com/project/crm/domain/User.java
- com.project.crm.domain.User
 com/project/crm/mapper/StatusMapper.java
  com.project.crm.mapper.StatusMapper
-com/project/crm/service/ClientService.java
- com.project.crm.service.ClientService
+com/project/crm/mapper/InvestmentMapper.java
+ com.project.crm.mapper.InvestmentMapper
+com/project/crm/domain/User.java
+ com.project.crm.domain.User
+com/project/crm/controller/UserController.java
+ com.project.crm.controller.UserController
+com/project/crm/service/ServiceConnected.java
+ com.project.crm.service.ServiceConnected
+com/project/crm/service/UserService.java
+ com.project.crm.service.UserService

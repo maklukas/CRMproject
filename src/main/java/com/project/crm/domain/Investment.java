@@ -34,7 +34,7 @@ public class Investment {
 
     @Id
     @NotNull
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "investment_id")
     private int id;
 

@@ -2,7 +2,6 @@ package com.project.crm.domain;
 
 import com.sun.istack.NotNull;
 import lombok.*;
-import org.hibernate.annotations.NaturalId;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 
@@ -22,12 +21,12 @@ public class Status {
     }
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "status_id")
     @NotNull
     private int id;
 
-    @NaturalId
+    @Column(unique = true)
     private String name;
 
     @OneToMany(mappedBy = "status")

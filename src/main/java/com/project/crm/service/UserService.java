@@ -1,6 +1,8 @@
 package com.project.crm.service;
 
+import com.project.crm.domain.Department;
 import com.project.crm.domain.User;
+import com.project.crm.repository.DepartmentRepository;
 import com.project.crm.repository.UserRepository;
 import com.project.crm.securingweb.PassEncryptor;
 import org.slf4j.Logger;
@@ -21,13 +23,25 @@ public class UserService {
     @Autowired
     private UserRepository repository;
 
+    @Autowired
+    private DepartmentRepository departmentRepository;
+
     public void createUser(User user) {
         LOGGER.info("Saving new user");
-        boolean result = repository.findAll().stream()
+
+        boolean username = repository.findAll().stream()
                 .filter(user1 -> user1.getUsername().equals(user.getUsername()))
                 .collect(toList()).size() == 0;
-        if (result) {
+
+        List<Department> departments = departmentRepository.findAll().stream()
+                .filter(d -> d.getName().equals(user.getDepartment().getName()))
+                .collect(toList());
+
+        if (username) {
             user.setPassword(new PassEncryptor().passwordEncoder().encode(user.getPassword()));
+            if (departments.size() != 0) {
+                user.setDepartment(departments.get(0));
+            }
             repository.save(user);
         } else {
             LOGGER.error("User with the username already exists.");
@@ -83,13 +97,22 @@ public class UserService {
 
     public void updateUser(User user) {
         LOGGER.info("Updating user");
-        boolean result = repository.findAll().stream()
+
+        boolean username = repository.findAll().stream()
                 .filter(user1 -> user1.getUsername().equals(user.getUsername())
                         && user1.getId() != user.getId())
                 .collect(toList()).size() == 0;
-        if (result) {
+
+        List<Department> departments = departmentRepository.findAll().stream()
+                .filter(d -> d.getName().equals(user.getDepartment().getName()))
+                .collect(toList());
+
+        if (username) {
             if (user.getPassword() != null) {
                 user.setPassword(new PassEncryptor().passwordEncoder().encode(user.getPassword()));
+            }
+            if (departments.size() != 0) {
+                user.setDepartment(departments.get(0));
             }
             repository.save(user);
         } else {

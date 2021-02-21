@@ -22,11 +22,12 @@ public class Department {
 
     @Id
     @NotNull
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "department_id")
     private int id;
 
     @NaturalId
+    @Column(unique = true)
     private String name;
 
     @OneToMany(mappedBy = "department")

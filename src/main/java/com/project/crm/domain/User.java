@@ -42,12 +42,13 @@ public class User {
 
     @Id
     @NotNull
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private int id;
 
     @NotNull
     @NaturalId
+    @Column(unique = true)
     private String username;
 
     @NotNull

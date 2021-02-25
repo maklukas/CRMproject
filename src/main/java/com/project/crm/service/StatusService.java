@@ -22,29 +22,20 @@ public class StatusService {
     public void createStatus(Status status) {
         LOGGER.info("Adding status");
 
-        boolean result = repository.findAll().stream()
-                .filter(status1 -> status1.getName().equals(status.getName()))
-                .collect(toList()).size() == 0;
-
-        if (result) {
+        try {
             repository.save(status);
-        } else {
-            LOGGER.error("Status already exists.");
+        } catch (Exception e) {
+            LOGGER.error("Status already exists." + e);
         }
     }
 
     public void updateStatus(Status status) {
         LOGGER.info("Updating status");
 
-        boolean result = repository.findAll().stream()
-                .filter(status1 -> status1.getName().equals(status.getName())
-                        && status1.getId() != status.getId())
-                .collect(toList()).size() == 0;
-
-        if (result) {
+        try {
             repository.save(status);
-        } else {
-            LOGGER.error("Status already exists.");
+        } catch (Exception e) {
+            LOGGER.error("Status already exists." + e);
         }
     }
 

@@ -27,26 +27,19 @@ public class CompanyService {
 
     public void createCompany(Company company) {
         LOGGER.info("Adding company");
-        boolean result = repository.findAll().stream()
-                .filter(company1 -> company1.getTaxNumber().equals(company.getTaxNumber()))
-                .collect(toList()).size() == 0;
-        if (result) {
+        try {
             repository.save(company);
-        } else {
-            LOGGER.error("Client with the tax number already exists");
+        } catch (Exception e){
+            LOGGER.error("Client with the tax number already exists. " + e);
         }
     }
 
     public void updateCompany(Company company) {
         LOGGER.info("Updating company");
-        boolean result = repository.findAll().stream()
-                .filter(company1 -> company1.getTaxNumber().equals(company.getTaxNumber())
-                        && company1.getId() != company.getId())
-                .collect(toList()).size() == 0;
-        if (result) {
+        try {
             repository.save(company);
-        } else {
-            LOGGER.error("Client with the tax number already exists");
+        } catch (Exception e) {
+            LOGGER.error("Client with the tax number already exists. " + e);
         }
     }
 

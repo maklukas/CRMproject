@@ -7,6 +7,7 @@ import com.project.crm.repository.StatusRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,13 +20,18 @@ public class InvestmentService {
     @Autowired
     private InvestmentRepository repository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     public void createInvestment(Investment investment) {
         LOGGER.info("Adding new investment");
+        investment.getRegisteredBy().setPassword(passwordEncoder.encode(investment.getRegisteredBy().getPassword()));
         repository.save(investment);
     }
 
     public void updateInvestment(Investment investment) {
         LOGGER.info("Updating investment");
+        investment.getRegisteredBy().setPassword(passwordEncoder.encode(investment.getRegisteredBy().getPassword()));
         repository.save(investment);
     }
 

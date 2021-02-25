@@ -22,27 +22,19 @@ public class DepartmentService {
 
     public void createDepartment(Department department) {
         LOGGER.info("Adding department");
-        boolean result = repository.findAll().stream()
-                .filter(department1 -> department1.getName().equals(department.getName()))
-                .collect(toList()).size() == 0;
-        if (result) {
+        try {
             repository.save(department);
-        } else {
-            LOGGER.error("Department already exists");
+        } catch (Exception e) {
+            LOGGER.error("Department already exists. " + e);
         }
     }
 
     public void updateDepartment(Department department) {
         LOGGER.info("Updating department");
-        boolean result = repository.findAll().stream()
-                .filter(department1 -> department1.getName().equals(department.getName())
-                        && department1.getId() != department.getId())
-                .collect(toList()).size() == 0;
-
-        if (result) {
+        try {
             repository.save(department);
-        } else {
-            LOGGER.error("Department already exists");
+        } catch (Exception e) {
+            LOGGER.error("Department already exists. " + e);
         }
     }
 

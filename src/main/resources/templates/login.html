@@ -1,0 +1,70 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+	  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <title>CRMPROJ</title>
+    <!-- Bootstrap core CSS -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+<link href="css/signin.css" rel="stylesheet">
+<script src="js/jquery.min.js"></script>
+  </head>
+  <body class="text-center">
+    
+<main class="form-signin">
+  <div>
+    <img class="mb-4" src="images/LOGO.png" alt="" width="200">
+    <div class="form">
+    
+    <form class="register-form">
+			<h1 class="h3 mb-3 fw-normal">Please register</h1>
+			<label for="regUsername" class="visually-hidden">Login</label>
+			<input type="text" id="regUsername" name="username" class="form-control mb-1" placeholder="Login" required autofocus>
+			<label for="regPassword" class="visually-hidden">Password</label>
+			<input type="password" id="regPassword" name="password" class="form-control mb-1" placeholder="Password" required>
+			<label for="confirmPassword" class="visually-hidden">Confirm password</label>
+			<input type="password" id="confirmPassword" class="form-control mb-1" placeholder="Confirm Password" required>
+			<label for="firstname"  class="visually-hidden">Firstname</label>
+			<input type="text" id="firstname" name="firstname" class="form-control mb-1" placeholder="Firstname">
+			<label for="lastname" class="visually-hidden">Lastname</label>
+			<input type="text" id="lastname" name="lastname" class="form-control mb-3" placeholder="Lastname">
+			  <button class="w-100 btn btn-lg btn-outline-primary mb-1" type="submit">Register</button>
+				<p class="message">Already registered? <a href="#">Login</a></p>
+			<div th:if="${param.logout}">
+				You have been logged out.
+			</div>
+		</form>
+  
+		<form
+			th:action="@{/login}"
+			class="login-form"
+			method="POST"
+		>
+			<h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+			<label for="logUsername" class="visually-hidden">Login</label>
+			<input type="text" id="logUsername" name="username" class="form-control mb-1" placeholder="Login" required minlength="3" autofocus>
+			<label for="logPassword" class="visually-hidden">Password</label>
+			<input type="password" id="logPassword" name="password" class="form-control mb-3" placeholder="Password" required minlength="3">
+			  <button class="w-100 btn btn-lg btn-outline-primary mb-1" type="submit">Sign in</button>
+				<p class="message">Not Registered? <a href="#">Register</a></p>
+			<div th:if="${param.error}">
+				Invalid username and password.
+			</div>
+			<div th:if="${param.logout}">
+				You have been logged out.
+			</div>
+		</form>
+		
+    </div>
+    <p class="mt-5 mb-3 text-muted">&copy; 2021</p>
+  </div>
+  
+  <script src="js/script.js"></script>
+  
+</main>
+    
+  </body>
+</html>

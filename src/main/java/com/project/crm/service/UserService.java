@@ -4,14 +4,13 @@ import com.project.crm.domain.Department;
 import com.project.crm.domain.User;
 import com.project.crm.repository.DepartmentRepository;
 import com.project.crm.repository.UserRepository;
-import com.project.crm.securingweb.PassEncryptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
@@ -26,25 +25,24 @@ public class UserService {
     @Autowired
     private DepartmentRepository departmentRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     public void createUser(User user) {
         LOGGER.info("Saving new user");
-
-        boolean username = repository.findAll().stream()
-                .filter(user1 -> user1.getUsername().equals(user.getUsername()))
-                .collect(toList()).size() == 0;
 
         List<Department> departments = departmentRepository.findAll().stream()
                 .filter(d -> d.getName().equals(user.getDepartment().getName()))
                 .collect(toList());
 
-        if (username) {
-            user.setPassword(new PassEncryptor().passwordEncoder().encode(user.getPassword()));
+        try {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
             if (departments.size() != 0) {
                 user.setDepartment(departments.get(0));
             }
             repository.save(user);
-        } else {
-            LOGGER.error("User with the username already exists.");
+        } catch (Exception e) {
+            LOGGER.error("User with the username already exists." + e);
         }
     }
 
@@ -98,27 +96,20 @@ public class UserService {
     public void updateUser(User user) {
         LOGGER.info("Updating user");
 
-        boolean username = repository.findAll().stream()
-                .filter(user1 -> user1.getUsername().equals(user.getUsername())
-                        && user1.getId() != user.getId())
-                .collect(toList()).size() == 0;
-
         List<Department> departments = departmentRepository.findAll().stream()
                 .filter(d -> d.getName().equals(user.getDepartment().getName()))
                 .collect(toList());
 
-        if (username) {
+        try {
             if (user.getPassword() != null) {
-                user.setPassword(new PassEncryptor().passwordEncoder().encode(user.getPassword()));
+                user.setPassword(passwordEncoder.encode(user.getPassword()));
             }
             if (departments.size() != 0) {
                 user.setDepartment(departments.get(0));
             }
             repository.save(user);
-        } else {
-            LOGGER.error("User with the username already exists.");
+        } catch (Exception e) {
+            LOGGER.error("User with the username already exists." + e);
         }
     }
-
-
 }

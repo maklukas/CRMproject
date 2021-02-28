@@ -19,7 +19,8 @@ public class InvestmentDatabaseTestSuite {
     public void shouldCreateInvestment() {
         //given
         Department department = new Department("Dział handlowy");
-        User user = new User("TUName", "pass", "Fn", "Ln", department);
+        Role role = new Role("USER");
+        User user = new User("TUName", "pass", "Fn", "Ln", department, role);
         Status status = new Status("NOWY");
         Investment investment = new Investment("Test investment", "Test Address", user, status);
         //when

@@ -25,7 +25,8 @@ public class ClientDatabaseTestSuite {
         Client client = new Client("Testowy", "Klient", 777444666);
         Company company = new Company("Company", "Addres testowy", "PL43413443434");
         Department department = new Department("Test Random");
-        User user = new User("TestingUser", "password", "fn", "ln", department);
+        Role role = new Role("USER");
+        User user = new User("TestingUser", "password", "fn", "ln", department, role);
         Status status = new Status("TestingStatus");
         Investment investment = new Investment("Inwestycja", "bna", user, status);
         client.addCompany(company);

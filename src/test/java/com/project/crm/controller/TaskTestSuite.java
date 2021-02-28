@@ -1,7 +1,6 @@
 package com.project.crm.controller;
 
 import com.google.gson.Gson;
-import com.project.crm.domain.Dto.StatusDto;
 import com.project.crm.domain.Dto.TaskDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;

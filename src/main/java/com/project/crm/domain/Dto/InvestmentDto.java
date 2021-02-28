@@ -1,5 +1,6 @@
 package com.project.crm.domain.Dto;
 
+import com.project.crm.domain.Status;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,5 +19,5 @@ public class InvestmentDto {
     private UserDto registeredBy;
     private List<CompanyDto> companies;
     private List<ClientDto> clients;
-    private StatusDto status;
+    private Status status;
 }

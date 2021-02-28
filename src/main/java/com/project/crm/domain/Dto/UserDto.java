@@ -1,5 +1,6 @@
 package com.project.crm.domain.Dto;
 
+import com.project.crm.domain.Department;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,5 +17,5 @@ public class UserDto {
     private String username;
     private String firstname;
     private String lastname;
-    private DepartmentDto department;
+    private Department department;
 }

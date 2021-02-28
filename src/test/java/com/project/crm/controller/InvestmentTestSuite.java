@@ -1,9 +1,7 @@
 package com.project.crm.controller;
 
 import com.google.gson.Gson;
-import com.project.crm.domain.Dto.DepartmentDto;
 import com.project.crm.domain.Dto.InvestmentDto;
-import com.project.crm.domain.Dto.StatusDto;
 import com.project.crm.domain.Dto.UserDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;

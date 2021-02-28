@@ -13,20 +13,11 @@ public class MapperConnected {
     public CompanyMapper company;
 
     @Autowired
-    public DepartmentMapper department;
-
-    @Autowired
     public InvestmentMapper investment;
-
-    @Autowired
-    public StatusMapper status;
 
     @Autowired
     public TaskMapper task;
 
     @Autowired
     public UserMapper user;
-
-    @Autowired
-    public RoleMapper role;
 }

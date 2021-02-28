@@ -23,7 +23,8 @@ public class TaskDatabaseTestSuite {
         LocalDateTime realisation = LocalDateTime.now().plusDays(5);
         Status status = new Status("Active");
         Department department = new Department("Export");
-        User user = new User("uname", "pass", "fn", "ln", department);
+        Role role = new Role("USER");
+        User user = new User("uname", "pass", "fn", "ln", department, role);
         Task task = new Task("Zadania", "Opis", realisation, status);
         task.addUser(user);
         //when

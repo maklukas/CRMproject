@@ -26,8 +26,9 @@ public class UserDatabaseTestSuite {
     public void shouldCreateUser() {
         //given
         Department department = new Department("Dział test");
-        User user = new User("login", "password", "fn", "ln", department);
-        User user2 = new User("login", "otherPass123", "first name", "last name", department);
+        Role role = new Role("USER");
+        User user = new User("login", "password", "fn", "ln", department, role);
+        User user2 = new User("login", "otherPass123", "first name", "last name", department, role);
         //when
         int resultDepartment = service.department.getDepartments().size() + 1;
         int resultUser = service.user.getUsers().size() + 1;

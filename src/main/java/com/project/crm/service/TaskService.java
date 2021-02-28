@@ -1,6 +1,8 @@
 package com.project.crm.service;
 
+import com.project.crm.domain.Status;
 import com.project.crm.domain.Task;
+import com.project.crm.repository.StatusRepository;
 import com.project.crm.repository.TaskRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,9 +19,39 @@ public class TaskService {
     @Autowired
     private TaskRepository repository;
 
-    public void createTask(Task task) {
+    @Autowired
+    private StatusRepository statusRepository;
+
+    public boolean createTask(Task task) {
         LOGGER.info("Adding task");
-        repository.save(task);
+        Status status;
+        try {
+            if (task.getStatus() != null) {
+                status = statusRepository.findByName(task.getStatus().getName()).orElse(task.getStatus());
+                task.setStatus(status);
+            }
+            repository.save(task);
+            return true;
+        } catch (Exception e) {
+            LOGGER.error("Cannot add task. " + e);
+            return false;
+        }
+    }
+
+    public boolean updateTask(Task task) {
+        LOGGER.info("Updating task");
+        Status status;
+        try {
+            if (task.getStatus() != null) {
+                status = statusRepository.findByName(task.getStatus().getName()).orElse(task.getStatus());
+                task.setStatus(status);
+            }
+            repository.save(task);
+            return true;
+        } catch (Exception e) {
+            LOGGER.error("Cannot update task. "+ e);
+            return false;
+        }
     }
 
     public void deleteTask(int id) {
@@ -38,11 +70,6 @@ public class TaskService {
         } catch (Exception e) {
             LOGGER.error("Not found task!");
         }
-    }
-
-    public void updateTask(Task task) {
-        LOGGER.info("Updating task");
-        repository.save(task);
     }
 
     public List<Task> getTasks() {

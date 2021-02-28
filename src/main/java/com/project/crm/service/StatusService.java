@@ -19,23 +19,26 @@ public class StatusService {
     @Autowired
     private StatusRepository repository;
 
-    public void createStatus(Status status) {
+    public boolean createStatus(Status status) {
         LOGGER.info("Adding status");
 
         try {
             repository.save(status);
+            return true;
         } catch (Exception e) {
             LOGGER.error("Status already exists." + e);
+            return false;
         }
     }
 
-    public void updateStatus(Status status) {
+    public boolean updateStatus(Status status) {
         LOGGER.info("Updating status");
-
         try {
             repository.save(status);
+            return true;
         } catch (Exception e) {
             LOGGER.error("Status already exists." + e);
+            return false;
         }
     }
 

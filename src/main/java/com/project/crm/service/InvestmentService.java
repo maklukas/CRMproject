@@ -2,8 +2,10 @@ package com.project.crm.service;
 
 import com.project.crm.domain.Investment;
 import com.project.crm.domain.Status;
+import com.project.crm.domain.User;
 import com.project.crm.repository.InvestmentRepository;
 import com.project.crm.repository.StatusRepository;
+import com.project.crm.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,16 +25,54 @@ public class InvestmentService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public void createInvestment(Investment investment) {
+    @Autowired
+    private StatusRepository statusRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    public boolean createInvestment(Investment investment) {
         LOGGER.info("Adding new investment");
+        Status status;
+        User registeredBy;
         investment.getRegisteredBy().setPassword(passwordEncoder.encode(investment.getRegisteredBy().getPassword()));
-        repository.save(investment);
+        try {
+            if (investment.getStatus() != null) {
+                status = statusRepository.findByName(investment.getStatus().getName()).orElse(investment.getStatus());
+                investment.setStatus(status);
+            }
+            if (investment.getRegisteredBy() != null) {
+                registeredBy = userRepository.findByUsername(investment.getRegisteredBy().getUsername()).orElse(investment.getRegisteredBy());
+                investment.setRegisteredBy(registeredBy);
+            }
+            repository.save(investment);
+            return true;
+        } catch (Exception e) {
+            LOGGER.error("Cannot create investment. " + e);
+            return false;
+        }
     }
 
-    public void updateInvestment(Investment investment) {
+    public boolean updateInvestment(Investment investment) {
         LOGGER.info("Updating investment");
+        Status status;
+        User registeredBy;
         investment.getRegisteredBy().setPassword(passwordEncoder.encode(investment.getRegisteredBy().getPassword()));
-        repository.save(investment);
+        try {
+            if (investment.getStatus() != null) {
+                status = statusRepository.findByName(investment.getStatus().getName()).orElse(investment.getStatus());
+                investment.setStatus(status);
+            }
+            if (investment.getRegisteredBy() != null) {
+                registeredBy = userRepository.findByUsername(investment.getRegisteredBy().getUsername()).orElse(investment.getRegisteredBy());
+                investment.setRegisteredBy(registeredBy);
+            }
+            repository.save(investment);
+            return true;
+        } catch (Exception e) {
+            LOGGER.error("Cannot update investment. " + e);
+            return false;
+        }
     }
 
     public void deleteInvestment(int id) {

@@ -17,9 +17,15 @@ public class ClientService {
     @Autowired
     private ClientRepository repository;
 
-    public void createClient(Client client) {
+    public boolean createClient(Client client) {
         LOGGER.info("Adding new client");
-        repository.save(client);
+        try {
+            repository.save(client);
+            return true;
+        } catch (Exception e) {
+            LOGGER.error("Cannot create client " + e);
+            return false;
+        }
     }
 
     public void deleteClient(int id) {
@@ -40,9 +46,15 @@ public class ClientService {
         }
     }
 
-    public void updateClient(Client client) {
+    public boolean updateClient(Client client) {
         LOGGER.info("Updating client");
-        repository.save(client);
+        try {
+            repository.save(client);
+            return true;
+        } catch (Exception e) {
+            LOGGER.error("Cannot update client. " + e);
+            return false;
+        }
     }
 
     public List<Client> getClients() {

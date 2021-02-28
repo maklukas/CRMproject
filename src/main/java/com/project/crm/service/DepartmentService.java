@@ -20,21 +20,25 @@ public class DepartmentService {
     @Autowired
     private DepartmentRepository repository;
 
-    public void createDepartment(Department department) {
+    public boolean createDepartment(Department department) {
         LOGGER.info("Adding department");
         try {
             repository.save(department);
+            return true;
         } catch (Exception e) {
             LOGGER.error("Department already exists. " + e);
+            return false;
         }
     }
 
-    public void updateDepartment(Department department) {
+    public boolean updateDepartment(Department department) {
         LOGGER.info("Updating department");
         try {
             repository.save(department);
+            return true;
         } catch (Exception e) {
             LOGGER.error("Department already exists. " + e);
+            return false;
         }
     }
 

@@ -28,21 +28,20 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public void createUser(User user) {
+    public boolean createUser(User user) {
         LOGGER.info("Saving new user");
-
-        List<Department> departments = departmentRepository.findAll().stream()
-                .filter(d -> d.getName().equals(user.getDepartment().getName()))
-                .collect(toList());
-
+        Department department;
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         try {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-            if (departments.size() != 0) {
-                user.setDepartment(departments.get(0));
+            if (user.getDepartment() != null) {
+                department = departmentRepository.findByName(user.getDepartment().getName()).orElse(user.getDepartment());
+                user.setDepartment(department);
             }
             repository.save(user);
+            return true;
         } catch (Exception e) {
-            LOGGER.error("User with the username already exists." + e);
+            LOGGER.error("Cannot add new user. " + e);
+            return false;
         }
     }
 
@@ -93,23 +92,22 @@ public class UserService {
         }
     }
 
-    public void updateUser(User user) {
+    public boolean updateUser(User user) {
         LOGGER.info("Updating user");
-
-        List<Department> departments = departmentRepository.findAll().stream()
-                .filter(d -> d.getName().equals(user.getDepartment().getName()))
-                .collect(toList());
-
+        Department department;
         try {
             if (user.getPassword() != null) {
                 user.setPassword(passwordEncoder.encode(user.getPassword()));
             }
-            if (departments.size() != 0) {
-                user.setDepartment(departments.get(0));
+            if (user.getDepartment() != null) {
+                department = departmentRepository.findByName(user.getDepartment().getName()).orElse(user.getDepartment());
+                user.setDepartment(department);
             }
             repository.save(user);
+            return true;
         } catch (Exception e) {
-            LOGGER.error("User with the username already exists." + e);
+            LOGGER.error("Cannot update user. " + e);
+            return false;
         }
     }
 }

@@ -25,21 +25,25 @@ public class CompanyService {
         return repository.findAll();
     }
 
-    public void createCompany(Company company) {
+    public boolean createCompany(Company company) {
         LOGGER.info("Adding company");
         try {
             repository.save(company);
+            return true;
         } catch (Exception e){
             LOGGER.error("Client with the tax number already exists. " + e);
+            return false;
         }
     }
 
-    public void updateCompany(Company company) {
+    public boolean updateCompany(Company company) {
         LOGGER.info("Updating company");
         try {
             repository.save(company);
+            return true;
         } catch (Exception e) {
             LOGGER.error("Client with the tax number already exists. " + e);
+            return false;
         }
     }
 

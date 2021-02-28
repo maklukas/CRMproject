@@ -26,4 +26,7 @@ public class MapperConnected {
 
     @Autowired
     public UserMapper user;
+
+    @Autowired
+    public RoleMapper role;
 }

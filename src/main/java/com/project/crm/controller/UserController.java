@@ -21,8 +21,8 @@ public class UserController {
     @Autowired
     private MapperConnected mapper;
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void addNewUser (@RequestBody User user) {
+    @PostMapping
+    public void addNewUser (@ModelAttribute User user) {
         userService.user.createUser(user);
     }
 
@@ -51,8 +51,8 @@ public class UserController {
         userService.user.deleteUser(id);
     }
 
-    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void updateUser(@RequestBody User user) {
+    @PutMapping
+    public void updateUser(@ModelAttribute User user) {
         userService.user.updateUser(user);
     }
 }

@@ -17,7 +17,7 @@ import java.util.List;
 @Entity(name = "users")
 public class User {
 
-    public User(int id, String username, String password, String firstname, String lastname, Department department, List<Investment> investments, List<Task> tasks) {
+    public User(int id, String username, String password, String firstname, String lastname, Department department, List<Investment> investments, List<Task> tasks, Role role) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -26,9 +26,10 @@ public class User {
         this.department = department;
         this.investments = investments;
         this.tasks = tasks;
+        this.role = role;
     }
 
-    public User(String username, String password, String firstname, String lastname, Department department) {
+    public User(String username, String password, String firstname, String lastname, Department department, Role role) {
         this.username = username;
         this.password = password;
         this.firstname = firstname;
@@ -36,6 +37,7 @@ public class User {
         this.department = department;
         this.tasks = new ArrayList<>();
         this.investments = new ArrayList<>();
+        this.role = role;
     }
 
     private static Logger LOGGER = LoggerFactory.getLogger(User.class);
@@ -82,6 +84,11 @@ public class User {
         tasks.remove(task);
         task.getUsers().remove(this);
     }
+
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @NotFound(action = NotFoundAction.IGNORE)
+    @JoinColumn(name = "role_id")
+    private Role role;
 
 }
 

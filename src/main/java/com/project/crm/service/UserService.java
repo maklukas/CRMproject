@@ -1,21 +1,28 @@
 package com.project.crm.service;
 
 import com.project.crm.domain.Department;
+import com.project.crm.domain.Role;
 import com.project.crm.domain.User;
 import com.project.crm.repository.DepartmentRepository;
+import com.project.crm.repository.RoleRepository;
 import com.project.crm.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static java.util.stream.Collectors.toList;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
 
     private static Logger LOGGER = LoggerFactory.getLogger(UserService.class);
 
@@ -26,17 +33,27 @@ public class UserService {
     private DepartmentRepository departmentRepository;
 
     @Autowired
+    private RoleRepository roleRepository;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     public boolean createUser(User user) {
         LOGGER.info("Saving new user");
         Department department;
+        Role role;
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         try {
             if (user.getDepartment() != null) {
                 department = departmentRepository.findByName(user.getDepartment().getName()).orElse(user.getDepartment());
                 user.setDepartment(department);
             }
+            if (user.getRole() != null) {
+                role = roleRepository.findByName(user.getRole().getName()).orElse(user.getRole());
+            } else {
+                role = roleRepository.findByName("USER").orElse(new Role("USER"));
+            }
+            user.setRole(role);
             repository.save(user);
             return true;
         } catch (Exception e) {
@@ -95,6 +112,7 @@ public class UserService {
     public boolean updateUser(User user) {
         LOGGER.info("Updating user");
         Department department;
+        Role role;
         try {
             if (user.getPassword() != null) {
                 user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -103,11 +121,31 @@ public class UserService {
                 department = departmentRepository.findByName(user.getDepartment().getName()).orElse(user.getDepartment());
                 user.setDepartment(department);
             }
+            if (user.getRole() != null) {
+                role = roleRepository.findByName(user.getRole().getName()).orElse(user.getRole());
+                user.setRole(role);
+            }
             repository.save(user);
             return true;
         } catch (Exception e) {
             LOGGER.error("Cannot update user. " + e);
             return false;
+        }
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Optional<User> optionalUser = repository.findByUsername(username);
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+
+            return org.springframework.security.core.userdetails.User.builder()
+                    .username(user.getUsername())
+                    .password(user.getPassword())
+                    .roles(user.getRole().getName())
+                    .build();
+        } else {
+            throw new UsernameNotFoundException("User Name is not Found");
         }
     }
 }

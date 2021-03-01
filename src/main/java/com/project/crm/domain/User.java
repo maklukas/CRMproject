@@ -56,6 +56,9 @@ public class User {
     @NotNull
     private String password;
 
+    @Transient
+    private String confirmPassword;
+
     private String firstname;
 
     private String lastname;

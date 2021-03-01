@@ -44,18 +44,23 @@ public class UserService implements UserDetailsService {
         Role role;
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         try {
-            if (user.getDepartment() != null) {
-                department = departmentRepository.findByName(user.getDepartment().getName()).orElse(user.getDepartment());
-                user.setDepartment(department);
-            }
-            if (user.getRole() != null) {
-                role = roleRepository.findByName(user.getRole().getName()).orElse(user.getRole());
+            if (!passwordEncoder.matches(user.getConfirmPassword(), user.getPassword())) {
+                LOGGER.error("Password and confirmed password are different");
+                return false;
             } else {
-                role = roleRepository.findByName("USER").orElse(new Role("USER"));
+                if (user.getDepartment() != null) {
+                    department = departmentRepository.findByName(user.getDepartment().getName()).orElse(user.getDepartment());
+                    user.setDepartment(department);
+                }
+                if (user.getRole() != null) {
+                    role = roleRepository.findByName(user.getRole().getName()).orElse(user.getRole());
+                } else {
+                    role = roleRepository.findByName("USER").orElse(new Role("USER"));
+                }
+                user.setRole(role);
+                repository.save(user);
+                return true;
             }
-            user.setRole(role);
-            repository.save(user);
-            return true;
         } catch (Exception e) {
             LOGGER.error("Cannot add new user. " + e);
             return false;

@@ -16,7 +16,7 @@ import java.util.List;
 public class TaskDto {
     private int id;
     private List<UserDto> users;
-    private Status status;
+    private StatusDto status;
     private String title;
     private String description;
     private LocalDateTime creationTime;

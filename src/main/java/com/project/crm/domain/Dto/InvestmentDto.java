@@ -19,5 +19,5 @@ public class InvestmentDto {
     private UserDto registeredBy;
     private List<CompanyDto> companies;
     private List<ClientDto> clients;
-    private Status status;
+    private StatusDto status;
 }

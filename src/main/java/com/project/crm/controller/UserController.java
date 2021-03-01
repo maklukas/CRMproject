@@ -46,6 +46,11 @@ public class UserController {
         return mapper.user.mapToUserDtoList(userService.user.getUserByDepartment(departmentName));
     }
 
+    @GetMapping(path = "/role/{roleName}")
+    public List<UserDto> getUserByRole(@PathVariable String roleName) {
+        return mapper.user.mapToUserDtoList(userService.user.getUserByRole(roleName));
+    }
+
     @DeleteMapping(path = "/{id}")
     public void deleteUser(@PathVariable int id) {
         userService.user.deleteUser(id);

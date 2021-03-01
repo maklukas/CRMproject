@@ -91,6 +91,15 @@ public class UserService implements UserDetailsService {
         return users;
     }
 
+    public List<User> getUserByRole(String roleName) {
+        LOGGER.info("Getting users by role");
+        List<User> users = repository.findAll()
+                .stream()
+                .filter(user -> user.getRole().getName().equals(roleName))
+                .collect(toList());
+        return users;
+    }
+
     public void deleteUser(int id) {
         LOGGER.info("Deleting user via id");
         try {

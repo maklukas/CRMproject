@@ -33,6 +33,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/", "/home").permitAll()
                     .antMatchers(HttpMethod.DELETE, "/v1/**").hasRole("ADMIN")
                     .antMatchers(HttpMethod.POST, "/v1/users").permitAll()
+                    .antMatchers("/v1/users/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                     .formLogin()

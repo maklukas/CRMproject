@@ -9,6 +9,11 @@ import com.project.crm.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -59,6 +64,10 @@ public class UserService implements UserDetailsService {
                 }
                 user.setRole(role);
                 repository.save(user);
+
+                UserDetails newUser = loadUserByUsername(user.getUsername());
+                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(newUser, null, newUser.getAuthorities());
+                SecurityContextHolder.getContext().setAuthentication(authentication);
                 return true;
             }
         } catch (Exception e) {
@@ -152,14 +161,21 @@ public class UserService implements UserDetailsService {
         Optional<User> optionalUser = repository.findByUsername(username);
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
-
-            return org.springframework.security.core.userdetails.User.builder()
-                    .username(user.getUsername())
-                    .password(user.getPassword())
-                    .roles(user.getRole().getName())
-                    .build();
+            return buildUser(user, buildUserAuthority(user.getRole()));
         } else {
             throw new UsernameNotFoundException("User Name is not Found");
         }
     }
+
+    private org.springframework.security.core.userdetails.User buildUser(User user, List<GrantedAuthority> authorities) {
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities);
+    }
+
+    private List<GrantedAuthority> buildUserAuthority(Role role) {
+        List<GrantedAuthority> roles = new ArrayList<>();
+        roles.add(new SimpleGrantedAuthority(role.getName()));
+        return roles;
+
+    }
+
 }

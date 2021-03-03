@@ -1,6 +1,7 @@
 package com.project.crm.controller;
 
 import com.google.gson.Gson;
+import com.project.crm.domain.Dto.DepartmentDto;
 import com.project.crm.domain.Dto.UserDto;
 import com.project.crm.domain.User;
 import org.junit.Test;
@@ -46,7 +47,8 @@ public class UserTestSuite {
                 "laTest",
                 null,
                 new ArrayList<>(),
-                new ArrayList<>());
+                new ArrayList<>(),
+                null);
         String context = new Gson().toJson(user);
         doNothing().when(controller).addNewUser(user);
         //when & then
@@ -65,7 +67,8 @@ public class UserTestSuite {
                 "laTest",
                 null,
                 new ArrayList<>(),
-                new ArrayList<>());
+                new ArrayList<>(),
+                null);
         String context = new Gson().toJson(user);
         doNothing().when(controller).updateUser(user);
         //when & then
@@ -81,6 +84,7 @@ public class UserTestSuite {
                 "username",
                 "firTest",
                 "laTest",
+                null,
                 null);
         int id = 1;
         doNothing().when(controller).deleteUser(id);
@@ -97,6 +101,7 @@ public class UserTestSuite {
                 "userTest",
                 "firTest",
                 "laTest",
+                null,
                 null);
         int id = 1;
         when(controller.getUser(id)).thenReturn(user);
@@ -118,6 +123,7 @@ public class UserTestSuite {
                 "userTest",
                 "firTest",
                 "laTest",
+                null,
                 null));
         when(controller.getUsers()).thenReturn(users);
         //when & then
@@ -139,6 +145,7 @@ public class UserTestSuite {
                 "userTest",
                 "firTest",
                 "laTest",
+                null,
                 null));
         String fragment = "Tes";
         when(controller.getUserByName(fragment)).thenReturn(users);
@@ -162,7 +169,8 @@ public class UserTestSuite {
                 "userTest",
                 "firTest",
                 "laTest",
-                department));
+                department,
+                null));
         String fragment = "DepTest";
         when(controller.getUserByDepartment(fragment)).thenReturn(users);
         //when & then

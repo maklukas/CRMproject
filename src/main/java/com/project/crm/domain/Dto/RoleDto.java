@@ -1,9 +1,10 @@
 package com.project.crm.domain.Dto;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
 @NoArgsConstructor
 public class RoleDto {
     private int id;

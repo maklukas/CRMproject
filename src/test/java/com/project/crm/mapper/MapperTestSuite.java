@@ -51,7 +51,7 @@ public class MapperTestSuite {
     public void shouldMapClientDto() {
         //given
         CompanyDto company = new CompanyDto(1, "NameT", "AddressT", "taxNO");
-        UserDto user = new UserDto(1, "Userman", "fnT", "lnT", null);
+        UserDto user = new UserDto(1, "Userman", "fnT", "lnT", null, null);
         InvestmentDto investment = new InvestmentDto(1, "ITest", "IAddre", user, new ArrayList<>(), new ArrayList<>(), null);
 
         List<CompanyDto> companies = new ArrayList<>();

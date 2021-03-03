@@ -1,8 +1,7 @@
 package com.project.crm.controller;
 
 import com.google.gson.Gson;
-import com.project.crm.domain.Dto.InvestmentDto;
-import com.project.crm.domain.Dto.UserDto;
+import com.project.crm.domain.Dto.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,7 +93,8 @@ public class InvestmentTestSuite {
     public void shouldGetInvestments() throws Exception {
         //given
         DepartmentDto departmentDto = new DepartmentDto(1, "TestDep");
-        UserDto user = new UserDto(1, "user", "fn", "ln", departmentDto);
+        RoleDto roleDto = new RoleDto(1, "USER");
+        UserDto user = new UserDto(1, "user", "fn", "ln", departmentDto, roleDto);
         StatusDto status = new StatusDto(1, "StTest");
         List<InvestmentDto> investments = new ArrayList<>();
         investments.add(new InvestmentDto(

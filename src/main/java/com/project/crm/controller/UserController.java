@@ -1,13 +1,14 @@
 package com.project.crm.controller;
 
-import com.project.crm.domain.User;
 import com.project.crm.domain.Dto.UserDto;
+import com.project.crm.domain.User;
 import com.project.crm.mapper.MapperConnected;
 import com.project.crm.service.ServiceConnected;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 @CrossOrigin("*")
@@ -22,8 +23,9 @@ public class UserController {
     private MapperConnected mapper;
 
     @PostMapping
-    public void addNewUser (@ModelAttribute User user) {
+    public void addNewUser (@ModelAttribute User user, HttpServletResponse response) throws IOException {
         userService.user.createUser(user);
+        response.sendRedirect("/hello");
     }
 
     @GetMapping

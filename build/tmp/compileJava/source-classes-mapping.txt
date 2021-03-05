@@ -1,96 +1,100 @@
-com/project/crm/domain/Dto/ClientDto.java
- com.project.crm.domain.Dto.ClientDto
-com/project/crm/repository/TaskRepository.java
- com.project.crm.repository.TaskRepository
-com/project/crm/repository/UserRepository.java
- com.project.crm.repository.UserRepository
-com/project/crm/repository/DepartmentRepository.java
- com.project.crm.repository.DepartmentRepository
+com/project/crm/mapper/UserMapper.java
+ com.project.crm.mapper.UserMapper
+com/project/crm/controller/CompanyController.java
+ com.project.crm.controller.CompanyController
+com/project/crm/domain/Client.java
+ com.project.crm.domain.Client
 com/project/crm/repository/StatusRepository.java
  com.project.crm.repository.StatusRepository
 com/project/crm/repository/CompanyRepository.java
  com.project.crm.repository.CompanyRepository
-com/project/crm/controller/CompanyController.java
- com.project.crm.controller.CompanyController
-com/project/crm/controller/ClientController.java
- com.project.crm.controller.ClientController
-com/project/crm/configuration/MvcConfig.java
- com.project.crm.configuration.MvcConfig
-com/project/crm/domain/Dto/CompanyDto.java
- com.project.crm.domain.Dto.CompanyDto
-com/project/crm/configuration/ApplicationConfig.java
- com.project.crm.configuration.ApplicationConfig
-com/project/crm/repository/RoleRepository.java
- com.project.crm.repository.RoleRepository
-com/project/crm/ApplicationRunner.java
- com.project.crm.ApplicationRunner
-com/project/crm/repository/InvestmentRepository.java
- com.project.crm.repository.InvestmentRepository
-com/project/crm/repository/ClientRepository.java
- com.project.crm.repository.ClientRepository
-com/project/crm/mapper/TaskMapper.java
- com.project.crm.mapper.TaskMapper
-com/project/crm/service/TaskService.java
- com.project.crm.service.TaskService
-com/project/crm/domain/User.java
- com.project.crm.domain.User
 com/project/crm/domain/Dto/StatusDto.java
  com.project.crm.domain.Dto.StatusDto
-com/project/crm/domain/Department.java
- com.project.crm.domain.Department
+com/project/crm/controller/UserController.java
+ com.project.crm.controller.UserController
 com/project/crm/domain/Status.java
  com.project.crm.domain.Status
-com/project/crm/service/StatusService.java
- com.project.crm.service.StatusService
-com/project/crm/domain/Dto/DepartmentDto.java
- com.project.crm.domain.Dto.DepartmentDto
-com/project/crm/mapper/InvestmentMapper.java
- com.project.crm.mapper.InvestmentMapper
-com/project/crm/domain/Dto/TaskDto.java
- com.project.crm.domain.Dto.TaskDto
-com/project/crm/controller/TaskController.java
- com.project.crm.controller.TaskController
-com/project/crm/domain/Company.java
- com.project.crm.domain.Company
-com/project/crm/service/DepartmentService.java
- com.project.crm.service.DepartmentService
-com/project/crm/domain/Dto/RoleDto.java
- com.project.crm.domain.Dto.RoleDto
-com/project/crm/domain/Client.java
- com.project.crm.domain.Client
-com/project/crm/domain/Dto/InvestmentDto.java
- com.project.crm.domain.Dto.InvestmentDto
-com/project/crm/domain/Task.java
- com.project.crm.domain.Task
-com/project/crm/service/ClientService.java
- com.project.crm.service.ClientService
-com/project/crm/mapper/ClientMapper.java
- com.project.crm.mapper.ClientMapper
+com/project/crm/configuration/ApplicationConfig.java
+ com.project.crm.configuration.ApplicationConfig
 com/project/crm/service/CompanyService.java
  com.project.crm.service.CompanyService
+com/project/crm/repository/InvestmentRepository.java
+ com.project.crm.repository.InvestmentRepository
+com/project/crm/domain/Dto/ClientDto.java
+ com.project.crm.domain.Dto.ClientDto
+com/project/crm/repository/DepartmentRepository.java
+ com.project.crm.repository.DepartmentRepository
+com/project/crm/service/ServiceConnected.java
+ com.project.crm.service.ServiceConnected
+com/project/crm/mapper/InvestmentMapper.java
+ com.project.crm.mapper.InvestmentMapper
+com/project/crm/service/ClientService.java
+ com.project.crm.service.ClientService
+com/project/crm/configuration/WebSecurityConfig.java
+ com.project.crm.configuration.WebSecurityConfig
+com/project/crm/domain/Dto/InvestmentDto.java
+ com.project.crm.domain.Dto.InvestmentDto
+com/project/crm/repository/RoleRepository.java
+ com.project.crm.repository.RoleRepository
+com/project/crm/service/StatusService.java
+ com.project.crm.service.StatusService
+com/project/crm/domain/Dto/CompanyDto.java
+ com.project.crm.domain.Dto.CompanyDto
 com/project/crm/mapper/CompanyMapper.java
  com.project.crm.mapper.CompanyMapper
 com/project/crm/service/RoleService.java
  com.project.crm.service.RoleService
+com/project/crm/domain/Dto/UserDto.java
+ com.project.crm.domain.Dto.UserDto
+com/project/crm/domain/Dto/TaskDto.java
+ com.project.crm.domain.Dto.TaskDto
+com/project/crm/controller/TaskController.java
+ com.project.crm.controller.TaskController
+com/project/crm/service/UserService.java
+ com.project.crm.service.UserService
+com/project/crm/domain/Dto/RoleDto.java
+ com.project.crm.domain.Dto.RoleDto
+com/project/crm/ApplicationRunner.java
+ com.project.crm.ApplicationRunner
+com/project/crm/repository/UserRepository.java
+ com.project.crm.repository.UserRepository
+com/project/crm/repository/TaskRepository.java
+ com.project.crm.repository.TaskRepository
+com/project/crm/controller/CommonController.java
+ com.project.crm.controller.CommonController
+com/project/crm/domain/Task.java
+ com.project.crm.domain.Task
+com/project/crm/domain/Department.java
+ com.project.crm.domain.Department
+com/project/crm/domain/Dto/DepartmentDto.java
+ com.project.crm.domain.Dto.DepartmentDto
+com/project/crm/controller/InvestmentController.java
+ com.project.crm.controller.InvestmentController
+com/project/crm/domain/Role.java
+ com.project.crm.domain.Role
+com/project/crm/domain/Company.java
+ com.project.crm.domain.Company
+com/project/crm/controller/ClientController.java
+ com.project.crm.controller.ClientController
+com/project/crm/domain/User.java
+ com.project.crm.domain.User
+com/project/crm/configuration/MvcConfig.java
+ com.project.crm.configuration.MvcConfig
+com/project/crm/mapper/MapperConnected.java
+ com.project.crm.mapper.MapperConnected
+com/project/crm/repository/ClientRepository.java
+ com.project.crm.repository.ClientRepository
+com/project/crm/mapper/ClientMapper.java
+ com.project.crm.mapper.ClientMapper
 com/project/crm/service/InvestmentService.java
  com.project.crm.service.InvestmentService
 com/project/crm/domain/Investment.java
  com.project.crm.domain.Investment
-com/project/crm/domain/Role.java
- com.project.crm.domain.Role
-com/project/crm/domain/Dto/UserDto.java
- com.project.crm.domain.Dto.UserDto
-com/project/crm/mapper/UserMapper.java
- com.project.crm.mapper.UserMapper
-com/project/crm/controller/InvestmentController.java
- com.project.crm.controller.InvestmentController
-com/project/crm/mapper/MapperConnected.java
- com.project.crm.mapper.MapperConnected
-com/project/crm/service/UserService.java
- com.project.crm.service.UserService
-com/project/crm/controller/UserController.java
- com.project.crm.controller.UserController
-com/project/crm/service/ServiceConnected.java
- com.project.crm.service.ServiceConnected
-com/project/crm/configuration/WebSecurityConfig.java
- com.project.crm.configuration.WebSecurityConfig
+com/project/crm/service/DepartmentService.java
+ com.project.crm.service.DepartmentService
+com/project/crm/service/TaskService.java
+ com.project.crm.service.TaskService
+com/project/crm/mapper/TaskMapper.java
+ com.project.crm.mapper.TaskMapper
+com/project/crm/gui/UserGui.java
+ com.project.crm.gui.UserGui

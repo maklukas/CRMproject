@@ -6,6 +6,15 @@
 </head>
 <body>
 <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+
+
+<a href="/hello/v1"><button>GUI</button></a>
+<a href="/v1/users"><button>USERS</button></a>
+<a href="/v1/tasks"><button>TASKS</button></a>
+<a href="/v1/clients"><button>CLIENTS</button></a>
+<a href="/v1/companies"><button>COMPANIES</button></a>
+<a href="/swagger-ui.html"><button>DOCS</button></a>
+
 <form th:action="@{/logout}" method="post">
     <input type="submit" value="Sign Out"/>
 </form>

@@ -20,4 +20,13 @@ public class MapperConnected {
 
     @Autowired
     public UserMapper user;
+
+    @Autowired
+    public RoleMapper role;
+
+    @Autowired
+    public DepartmentMapper department;
+
+    @Autowired
+    public StatusMapper status;
 }

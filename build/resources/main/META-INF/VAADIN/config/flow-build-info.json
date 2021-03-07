@@ -1,9 +1,0 @@
-{
-  "compatibilityMode": false,
-  "productionMode": false,
-  "npmFolder": "D:\\java dev\\CRMproject",
-  "generatedFolder": "D:\\java dev\\CRMproject\\target\\frontend",
-  "frontendFolder": "D:\\java dev\\CRMproject\\frontend",
-  "pnpm.enable": false,
-  "require.home.node": false
-}

@@ -1,9 +1,7 @@
 package com.project.crm.controller;
 
 import com.project.crm.domain.Dto.InvestmentDto;
-import com.project.crm.mapper.InvestmentMapper;
 import com.project.crm.mapper.MapperConnected;
-import com.project.crm.service.InvestmentService;
 import com.project.crm.service.ServiceConnected;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -26,7 +24,7 @@ public class InvestmentController {
         service.investment.createInvestment(mapper.investment.mapToInvestment(investmentDto));
     }
 
-    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PatchMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public void updateInvestment(@RequestBody InvestmentDto investmentDto) {
         service.investment.updateInvestment(mapper.investment.mapToInvestment(investmentDto));
     }

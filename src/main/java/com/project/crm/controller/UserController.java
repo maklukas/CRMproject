@@ -58,7 +58,7 @@ public class UserController {
         userService.user.deleteUser(id);
     }
 
-    @PutMapping
+    @PatchMapping
     public void updateUser(@ModelAttribute User user) {
         userService.user.updateUser(user);
     }

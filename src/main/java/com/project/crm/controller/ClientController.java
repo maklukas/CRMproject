@@ -25,7 +25,7 @@ public class ClientController {
         service.client.createClient(mapper.client.mapToClient(clientDto));
     }
 
-    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PatchMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public void updateClient(@RequestBody ClientDto clientDto) {
         service.client.updateClient(mapper.client.mapToClient(clientDto));
     }

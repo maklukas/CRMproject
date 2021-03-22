@@ -26,7 +26,7 @@ public class TaskController {
         service.task.createTask(mapper.task.mapToTask(taskDto));
     }
 
-    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PatchMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public void updateTask(@RequestBody TaskDto taskDto) {
         service.task.updateTask(mapper.task.mapToTask(taskDto));
     }

@@ -1,9 +1,7 @@
 package com.project.crm.controller;
 
 import com.project.crm.domain.Dto.CompanyDto;
-import com.project.crm.mapper.CompanyMapper;
 import com.project.crm.mapper.MapperConnected;
-import com.project.crm.service.CompanyService;
 import com.project.crm.service.ServiceConnected;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -42,7 +40,7 @@ public class CompanyController {
         return mapper.company.mapToCompanyDtoList(service.company.getCompanyByFragment(txt));
     }
 
-    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PatchMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public void updateCompany(@RequestBody CompanyDto companyDto) {
         service.company.updateCompany(mapper.company.mapToCompany(companyDto));
     }

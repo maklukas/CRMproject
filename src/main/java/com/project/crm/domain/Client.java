@@ -1,7 +1,6 @@
 package com.project.crm.domain;
 
 import com.sun.istack.NotNull;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,7 +15,6 @@ import java.util.List;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "clients")
 public class Client {
@@ -84,5 +82,10 @@ public class Client {
         this.companies.remove(investment);
         investment.getClients().remove(this);
     }
+
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @NotFound(action = NotFoundAction.IGNORE)
+    @JoinColumn(name = "status_id")
+    private Status status;
 
 }

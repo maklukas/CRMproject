@@ -1,6 +1,7 @@
 package com.project.crm.service;
 
 import com.project.crm.domain.Company;
+import com.project.crm.domain.Status;
 import com.project.crm.repository.CompanyRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
@@ -18,7 +18,10 @@ public class CompanyService {
     public static Logger LOGGER = LoggerFactory.getLogger(CompanyService.class);
 
     @Autowired
-    CompanyRepository repository;
+    private CompanyRepository repository;
+
+    @Autowired
+    private ServiceConnected service;
 
     public List<Company> getCompanies() {
         LOGGER.info("Fetching all companies");
@@ -28,6 +31,11 @@ public class CompanyService {
     public boolean createCompany(Company company) {
         LOGGER.info("Adding company");
         try {
+            if (company.getStatus() != null) {
+                company.setStatus(service.status.createStatus(company.getStatus()));
+            } else {
+                company.setStatus(service.status.createStatus(new Status("Active")));
+            }
             repository.save(company);
             return true;
         } catch (Exception e){

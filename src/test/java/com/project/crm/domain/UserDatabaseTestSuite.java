@@ -5,12 +5,9 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -26,9 +23,8 @@ public class UserDatabaseTestSuite {
     public void shouldCreateUser() {
         //given
         Department department = new Department("Dział test");
-        Role role = new Role("USER");
-        User user = new User("login", "password", "fn", "ln", department, role);
-        User user2 = new User("login", "otherPass123", "first name", "last name", department, role);
+        User user = new User("login", "password", "fn", "ln");
+        User user2 = new User("login", "otherPass123", "first name", "last name");
         //when
         int resultDepartment = service.department.getDepartments().size() + 1;
         int resultUser = service.user.getUsers().size() + 1;

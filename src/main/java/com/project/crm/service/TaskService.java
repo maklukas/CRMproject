@@ -2,7 +2,7 @@ package com.project.crm.service;
 
 import com.project.crm.domain.Status;
 import com.project.crm.domain.Task;
-import com.project.crm.repository.StatusRepository;
+import com.project.crm.domain.User;
 import com.project.crm.repository.TaskRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,16 +20,24 @@ public class TaskService {
     private TaskRepository repository;
 
     @Autowired
-    private StatusRepository statusRepository;
+    private ServiceConnected service;
 
     public boolean createTask(Task task) {
         LOGGER.info("Adding task");
         Status status;
+
         try {
-            if (task.getStatus() != null) {
-                status = statusRepository.findByName(task.getStatus().getName()).orElse(task.getStatus());
-                task.setStatus(status);
+
+            if (task.getUsers().size() != 0) {
+                task.setUsers(service.user.getUsersByUsernames(task.getUsers().stream().map(User::getUsername).collect(Collectors.toList())));
             }
+
+            if (task.getStatus() != null) {
+                task.setStatus(service.status.createStatus(task.getStatus()));
+            } else {
+                task.setStatus(service.status.createStatus(new Status("Active")));
+            }
+
             repository.save(task);
             return true;
         } catch (Exception e) {
@@ -43,7 +51,7 @@ public class TaskService {
         Status status;
         try {
             if (task.getStatus() != null) {
-                status = statusRepository.findByName(task.getStatus().getName()).orElse(task.getStatus());
+                status = service.status.getStatusByName(task.getStatus().getName());
                 task.setStatus(status);
             }
             repository.save(task);
@@ -75,6 +83,12 @@ public class TaskService {
     public List<Task> getTasks() {
         LOGGER.info("Fetching all tasks");
         return repository.findAll();
+    }
+
+    public List<Task> getTasks4TheUser(String username) {
+        LOGGER.info("Fetching tasks for the user");
+        User user = service.user.getUserByUsername(username);
+        return user.getTasks();
     }
 
     public Task getTaskById(int id) {

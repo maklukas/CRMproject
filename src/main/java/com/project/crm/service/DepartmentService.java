@@ -8,9 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collector;
-
-import static java.util.stream.Collectors.toList;
 
 @Service
 public class DepartmentService {
@@ -20,14 +17,17 @@ public class DepartmentService {
     @Autowired
     private DepartmentRepository repository;
 
-    public boolean createDepartment(Department department) {
+    public Department createDepartment(Department department) {
         LOGGER.info("Adding department");
         try {
-            repository.save(department);
-            return true;
+            if (getDepartmentByName(department.getName()) != null) {
+                return getDepartmentByName(department.getName());
+            } else {
+                return repository.save(department);
+            }
         } catch (Exception e) {
-            LOGGER.error("Department already exists. " + e);
-            return false;
+            LOGGER.error("Cannot create department. " + e);
+            return null;
         }
     }
 
@@ -68,6 +68,11 @@ public class DepartmentService {
     public Department getDepartment(int id) {
         LOGGER.info("Fetching department by id");
         return repository.findById(id).orElse(null);
+    }
+
+    public Department getDepartmentByName(String name) {
+        LOGGER.info("Fetching department by name");
+        return repository.findByName(name).orElse(null);
     }
 
 

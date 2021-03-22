@@ -1,6 +1,7 @@
 package com.project.crm.service;
 
 import com.project.crm.domain.Client;
+import com.project.crm.domain.Status;
 import com.project.crm.repository.ClientRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,9 +18,17 @@ public class ClientService {
     @Autowired
     private ClientRepository repository;
 
+    @Autowired
+    private ServiceConnected service;
+
     public boolean createClient(Client client) {
         LOGGER.info("Adding new client");
         try {
+            if (client.getStatus() != null) {
+                client.setStatus(service.status.createStatus(client.getStatus()));
+            } else {
+                client.setStatus(service.status.createStatus(new Status("Active")));
+            }
             repository.save(client);
             return true;
         } catch (Exception e) {

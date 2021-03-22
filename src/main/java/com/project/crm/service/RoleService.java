@@ -17,14 +17,17 @@ public class RoleService {
     @Autowired
     private RoleRepository repository;
 
-    public boolean createRole(Role role) {
+    public Role createRole(Role role) {
         LOGGER.info("Creating Role");
         try {
-            repository.save(role);
-            return true;
+            if (getRoleByName(role.getName()) != null) {
+                return getRoleByName(role.getName());
+            } else {
+                return repository.save(role);
+            }
         } catch (Exception e) {
             LOGGER.error("Cannot create Role. " + e);
-            return false;
+            return null;
         }
     }
 
@@ -65,5 +68,10 @@ public class RoleService {
     public Role getRole(int id) {
         LOGGER.info("Fetching role by id");
         return repository.findById(id).orElse(null);
+    }
+
+    public Role getRoleByName(String name) {
+        LOGGER.info("Fetching role by name");
+        return repository.findByName(name).orElse(null);
     }
 }

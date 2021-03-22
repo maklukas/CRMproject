@@ -1,16 +1,13 @@
 package com.project.crm.service;
 
-import com.project.crm.domain.Department;
 import com.project.crm.domain.Role;
+import com.project.crm.domain.Status;
 import com.project.crm.domain.User;
-import com.project.crm.repository.DepartmentRepository;
-import com.project.crm.repository.RoleRepository;
 import com.project.crm.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,6 +20,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
@@ -35,18 +33,13 @@ public class UserService implements UserDetailsService {
     private UserRepository repository;
 
     @Autowired
-    private DepartmentRepository departmentRepository;
-
-    @Autowired
-    private RoleRepository roleRepository;
+    private ServiceConnected service;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
 
     public boolean createUser(User user) {
         LOGGER.info("Saving new user");
-        Department department;
-        Role role;
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         try {
             if (!passwordEncoder.matches(user.getConfirmPassword(), user.getPassword())) {
@@ -54,15 +47,20 @@ public class UserService implements UserDetailsService {
                 return false;
             } else {
                 if (user.getDepartment() != null) {
-                    department = departmentRepository.findByName(user.getDepartment().getName()).orElse(user.getDepartment());
-                    user.setDepartment(department);
+                    user.setDepartment(service.department.createDepartment(user.getDepartment()));
                 }
-                if (user.getRole() != null) {
-                    role = roleRepository.findByName(user.getRole().getName()).orElse(user.getRole());
+
+                if (user.getStatus() != null) {
+                    user.setStatus(service.status.createStatus(user.getStatus()));
                 } else {
-                    role = roleRepository.findByName("USER").orElse(new Role("USER"));
+                    user.setStatus(service.status.createStatus(new Status("Active")));
                 }
-                user.setRole(role);
+
+                if (user.getRole() != null) {
+                    user.setRole(service.role.createRole(user.getRole()));
+                } else {
+                    user.setRole(service.role.createRole(new Role("USER")));
+                }
                 repository.save(user);
 
                 UserDetails newUser = loadUserByUsername(user.getUsername());
@@ -134,19 +132,54 @@ public class UserService implements UserDetailsService {
 
     public boolean updateUser(User user) {
         LOGGER.info("Updating user");
-        Department department;
         Role role;
         try {
             if (user.getPassword() != null) {
                 user.setPassword(passwordEncoder.encode(user.getPassword()));
             }
             if (user.getDepartment() != null) {
-                department = departmentRepository.findByName(user.getDepartment().getName()).orElse(user.getDepartment());
-                user.setDepartment(department);
+                try {
+                    service.department.createDepartment(user.getDepartment());
+                } catch (Exception e) {
+                    LOGGER.info("Fetching department");
+                } finally {
+                    user.setDepartment(service.department.getDepartmentByName(user.getDepartment().getName()));
+                }
             }
+            if (user.getStatus() != null) {
+                try {
+                    service.status.createStatus(user.getStatus());
+                } catch (Exception e) {
+                    LOGGER.info("Fetching status");
+                } finally {
+                    user.setStatus(service.status.getStatusByName(user.getStatus().getName()));
+                }
+            } else {
+                try {
+                    service.status.createStatus(new Status("Active"));
+                } catch (Exception e) {
+                    LOGGER.info("Fetching status");
+                } finally {
+                    user.setStatus(service.status.getStatusByName("Active"));
+                }
+            }
+
             if (user.getRole() != null) {
-                role = roleRepository.findByName(user.getRole().getName()).orElse(user.getRole());
-                user.setRole(role);
+                try {
+                    service.role.createRole(user.getRole());
+                } catch (Exception e) {
+                    LOGGER.info("Fetching role");
+                } finally {
+                    user.setRole(service.role.getRoleByName(user.getRole().getName()));
+                }
+            } else {
+                try {
+                    service.role.createRole(new Role("USER"));
+                } catch (Exception e) {
+                    LOGGER.info("Fetching role");
+                } finally {
+                    user.setRole(service.role.getRoleByName("USER"));
+                }
             }
             repository.save(user);
             return true;
@@ -176,6 +209,23 @@ public class UserService implements UserDetailsService {
         roles.add(new SimpleGrantedAuthority(role.getName()));
         return roles;
 
+    }
+
+    public User getUserByUsername(String username) {
+        Optional<User> optionalUser = repository.findByUsername(username);
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            return user;
+        } else {
+            throw new UsernameNotFoundException("User Name is not Found");
+        }
+    }
+
+    public List<User> getUsersByUsernames(List<String> usernames) {
+        return usernames.stream()
+                .filter(username -> repository.findByUsername(username).isPresent())
+                .map(u -> repository.findByUsername(u).get())
+                .collect(Collectors.toList());
     }
 
 }

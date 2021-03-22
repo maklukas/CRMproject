@@ -41,7 +41,8 @@ public class CompanyTestSuite {
                 1,
                 "Test company",
                 "Test address",
-                "TE154454566"
+                "TE154454566",
+                null
         );
         doNothing().when(controller).createCompany(company);
         String context = new Gson().toJson(company);
@@ -58,7 +59,8 @@ public class CompanyTestSuite {
                 1,
                 "Test company",
                 "Test address",
-                "TE154454566"
+                "TE154454566",
+                null
         ));
         when(controller.getCompanies()).thenReturn(companies);
         //when & then
@@ -78,7 +80,8 @@ public class CompanyTestSuite {
                 1,
                 "Test company",
                 "Test address",
-                "TE154454566"
+                "TE154454566",
+                null
         );
         int id = 1;
         when(controller.getCompanyById(1)).thenReturn(company);
@@ -99,7 +102,8 @@ public class CompanyTestSuite {
                 1,
                 "Test company",
                 "Test address",
-                "TE154454566"
+                "TE154454566",
+                null
         ));
         String fragment = "comp";
         when(controller.getCompaniesByFragment(fragment)).thenReturn(companies);
@@ -120,7 +124,8 @@ public class CompanyTestSuite {
                 1,
                 "Test company",
                 "Test address",
-                "TE154454566"
+                "TE154454566",
+                null
         );
         doNothing().when(controller).updateCompany(company);
         String context = new Gson().toJson(company);
@@ -136,7 +141,8 @@ public class CompanyTestSuite {
                 1,
                 "Test company",
                 "Test address",
-                "TE154454566"
+                "TE154454566",
+                null
         );
         int id = 1;
         doNothing().when(controller).deleteCompany(id);

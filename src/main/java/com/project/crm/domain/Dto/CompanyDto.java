@@ -5,8 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -16,4 +14,5 @@ public class CompanyDto {
     private String name;
     private String address;
     private String taxNumber;
+    private StatusDto status;
 }

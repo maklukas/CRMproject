@@ -26,9 +26,9 @@ public class ClientDatabaseTestSuite {
         Company company = new Company("Company", "Addres testowy", "PL43413443434");
         Department department = new Department("Test Random");
         Role role = new Role("USER");
-        User user = new User("TestingUser", "password", "fn", "ln", department, role);
-        Status status = new Status("TestingStatus");
-        Investment investment = new Investment("Inwestycja", "bna", user, status);
+        User user = new User("TestingUser", "password", "fn", "ln");
+        user.setRole(role);
+        Investment investment = new Investment("Inwestycja", "bna", user);
         client.addCompany(company);
         client.addInvestment(investment);
         //when
@@ -52,7 +52,6 @@ public class ClientDatabaseTestSuite {
         serviceConnected.company.deleteCompany(company.getId());
         serviceConnected.department.deleteDepartment(department.getId());
         serviceConnected.user.deleteUser(user.getId());
-        serviceConnected.status.deleteStatus(status.getId());
         serviceConnected.investment.deleteInvestment(investment.getId());
 
 

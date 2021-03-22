@@ -25,16 +25,17 @@ public class MapperTestSuite {
     public void shouldMapClient() {
         //given
         Company company = new Company("NameT", "AddressT", "taxNO");
-        Role role = new Role("USER");
-        User user = new User("Userman", "pasman", "fnT", "lnT", null, role);
-        Investment investment = new Investment("ITest", "IAddre", user, null);
+        User user = new User("Userman", "pasman", "fnT", "lnT");
+        Investment investment = new Investment("ITest", "IAddre", user);
 
         List<Company> companies = new ArrayList<>();
         companies.add(company);
         List<Investment> investments = new ArrayList<>();
         investments.add(investment);
 
-        Client client = new Client(1, "Lukasz", "Makuch", 880700290, companies, investments);
+        Client client = new Client("Lukasz", "Makuch", 880700290);
+        client.setCompanies(companies);
+        client.setInvestments(investments);
         //when
         ClientDto clientDto = mapper.client.mapToClientDto(client);
 
@@ -50,8 +51,8 @@ public class MapperTestSuite {
     @Test
     public void shouldMapClientDto() {
         //given
-        CompanyDto company = new CompanyDto(1, "NameT", "AddressT", "taxNO");
-        UserDto user = new UserDto(1, "Userman", "fnT", "lnT", null, null);
+        CompanyDto company = new CompanyDto(1, "NameT", "AddressT", "taxNO", null);
+        UserDto user = new UserDto(1, "Userman", "fnT", "lnT", null, null, null);
         InvestmentDto investment = new InvestmentDto(1, "ITest", "IAddre", user, new ArrayList<>(), new ArrayList<>(), null);
 
         List<CompanyDto> companies = new ArrayList<>();
@@ -59,7 +60,7 @@ public class MapperTestSuite {
         companies.add(company);
         investments.add(investment);
 
-        ClientDto clientDto = new ClientDto(1, "Lukasz", "Makuch", 880700290, companies);
+        ClientDto clientDto = new ClientDto(1, "Lukasz", "Makuch", 880700290, companies, null);
         //when
         Client client = mapper.client.mapToClient(clientDto);
 
@@ -88,7 +89,7 @@ public class MapperTestSuite {
     @Test
     public void shouldMapDtoToCompany() {
         //given
-        CompanyDto companyDto = new CompanyDto(1,"Name", "address", "TaxNo");
+        CompanyDto companyDto = new CompanyDto(1,"Name", "address", "TaxNo", null);
         //when
         Company company = mapper.company.mapToCompany(companyDto);
         //then
@@ -105,10 +106,8 @@ public class MapperTestSuite {
     public void shouldMapInvestments() {
         //given
         Department department = new Department("NDep");
-        Role role = new Role("USER");
-        User user = new User("uname", "upas", "fn", "ln", department, role);
-        Status status = new Status("Nowy");
-        Investment investment = new Investment("NTe", "NTadd", user, status);
+        User user = new User("uname", "upas", "fn", "ln");
+        Investment investment = new Investment("NTe", "NTadd", user);
         //when
         InvestmentDto investmentDto = mapper.investment.mapToInvestmentDto(investment);
         //then
@@ -157,7 +156,8 @@ public class MapperTestSuite {
     public void shouldMapTask() {
         //given
         Status status = new Status("Nowy");
-        Task task = new Task("TaskN", "tDescr", LocalDateTime.now().plusDays(10), status);
+        Task task = new Task("TaskN", "tDescr", LocalDateTime.now().plusDays(10));
+        task.setStatus(status);
         //when
         TaskDto taskDto = mapper.task.mapToTaskDto(task);
         //then
@@ -199,8 +199,7 @@ public class MapperTestSuite {
     public void shouldMapUser() {
         //given
         Department department = new Department("Depar");
-        Role role = new Role("USER");
-        User user = new User("Una", "pase", "ln", "fn", department, role);
+        User user = new User("Una", "pase", "ln", "fn");
         //when
         UserDto userDto = mapper.user.mapToUserDto(user);
         //then

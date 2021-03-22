@@ -9,8 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static java.util.stream.Collectors.toList;
-
 @Service
 public class StatusService {
 
@@ -19,15 +17,18 @@ public class StatusService {
     @Autowired
     private StatusRepository repository;
 
-    public boolean createStatus(Status status) {
+    public Status createStatus(Status status) {
         LOGGER.info("Adding status");
 
         try {
-            repository.save(status);
-            return true;
+            if (getStatusByName(status.getName()) != null) {
+                return getStatusByName(status.getName());
+            } else {
+                return repository.save(status);
+            }
         } catch (Exception e) {
-            LOGGER.error("Status already exists." + e);
-            return false;
+            LOGGER.info("Cannot create status. " + e);
+            return null;
         }
     }
 
@@ -68,5 +69,10 @@ public class StatusService {
     public Status getStatus(int id) {
         LOGGER.info("Fetching status by id");
         return repository.findById(id).orElse(null);
+    }
+
+    public Status getStatusByName(String name) {
+        LOGGER.info("Fetching status by name");
+        return repository.findByName(name).orElse(null);
     }
 }

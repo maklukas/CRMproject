@@ -20,9 +20,9 @@ public class InvestmentDatabaseTestSuite {
         //given
         Department department = new Department("Dział handlowy");
         Role role = new Role("USER");
-        User user = new User("TUName", "pass", "Fn", "Ln", department, role);
-        Status status = new Status("NOWY");
-        Investment investment = new Investment("Test investment", "Test Address", user, status);
+        User user = new User("TUName", "pass", "Fn", "Ln");
+        user.setRole(role);
+        Investment investment = new Investment("Test investment", "Test Address", user);
         //when
         service.investment.createInvestment(investment);
         //then
@@ -34,6 +34,5 @@ public class InvestmentDatabaseTestSuite {
         service.investment.deleteInvestment(investment.getId());
         service.department.deleteDepartment(department.getId());
         service.user.deleteUser(user.getId());
-        service.status.deleteStatus(status.getId());
     }
 }

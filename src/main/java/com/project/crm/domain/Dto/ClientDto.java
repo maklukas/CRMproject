@@ -17,4 +17,5 @@ public class ClientDto {
     private String lastname;
     private int phoneNo;
     private List<CompanyDto> companies;
+    private StatusDto status;
 }

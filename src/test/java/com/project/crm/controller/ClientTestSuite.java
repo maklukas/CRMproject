@@ -43,7 +43,8 @@ public class ClientTestSuite {
                 "Lukasz",
                 "Makuch",
                 880700290,
-                new ArrayList<>()
+                new ArrayList<>(),
+                null
         );
         doNothing().when(controller).createClient(client);
 
@@ -61,7 +62,8 @@ public class ClientTestSuite {
                 "Lukasz",
                 "Makuch",
                 880700290,
-                new ArrayList<>())
+                new ArrayList<>(),
+                null)
         );
         when(controller.getClients()).thenReturn(clients);
         //when & then
@@ -82,7 +84,8 @@ public class ClientTestSuite {
                 "Lukasz",
                 "Makuch",
                 880700290,
-                new ArrayList<>()
+                new ArrayList<>(),
+                null
         );
 
         int id = 1;
@@ -105,7 +108,8 @@ public class ClientTestSuite {
                 "Lukasz",
                 "Makuch",
                 880700290,
-                new ArrayList<>()
+                new ArrayList<>(),
+                null
         );
         doNothing().when(controller).deleteClient(1);
         //when & then
@@ -122,7 +126,8 @@ public class ClientTestSuite {
                 "Lukasz",
                 "Makuch",
                 880700290,
-                new ArrayList<>()
+                new ArrayList<>(),
+                null
         );
         doNothing().when(controller).updateClient(client);
         String gson = new Gson().toJson(client);
@@ -142,7 +147,8 @@ public class ClientTestSuite {
                 "Lukasz",
                 "Makuch",
                 880700290,
-                new ArrayList<>())
+                new ArrayList<>(),
+                null)
         );
         String txt = "Mak";
         when(controller.getClientByFragment(txt)).thenReturn(clients);

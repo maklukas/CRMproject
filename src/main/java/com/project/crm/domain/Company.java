@@ -11,7 +11,8 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @Entity(name = "companies")
 public class Company {
@@ -70,5 +71,10 @@ public class Company {
         investments.remove(investment);
         investment.getCompanies().remove(this);
     }
+
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @NotFound(action = NotFoundAction.IGNORE)
+    @JoinColumn(name = "status_id")
+    private Status status;
 
 }

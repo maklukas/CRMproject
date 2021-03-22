@@ -40,17 +40,13 @@ public class UserTestSuite {
     public void shouldCreateUser() throws Exception {
         //given
         User user = new User(
-                1,
                 "username",
                 "password",
                 "firTest",
-                "laTest",
-                null,
-                new ArrayList<>(),
-                new ArrayList<>(),
-                null);
+                "laTest"
+        );
         String context = new Gson().toJson(user);
-        doNothing().when(controller).addNewUser(user);
+   //     doNothing().when(controller).addNewUser(user);
         //when & then
         mockMvc.perform(post("/v1/users").contentType(MediaType.APPLICATION_JSON_VALUE).content(context))
                 .andExpect(status().isOk());
@@ -60,15 +56,10 @@ public class UserTestSuite {
     public void shouldUpdateUser() throws Exception {
         //given
         User user = new User(
-                1,
                 "username",
                 "password",
                 "firTest",
-                "laTest",
-                null,
-                new ArrayList<>(),
-                new ArrayList<>(),
-                null);
+                "laTest");
         String context = new Gson().toJson(user);
         doNothing().when(controller).updateUser(user);
         //when & then
@@ -84,6 +75,7 @@ public class UserTestSuite {
                 "username",
                 "firTest",
                 "laTest",
+                null,
                 null,
                 null);
         int id = 1;
@@ -101,6 +93,7 @@ public class UserTestSuite {
                 "userTest",
                 "firTest",
                 "laTest",
+                null,
                 null,
                 null);
         int id = 1;
@@ -124,6 +117,7 @@ public class UserTestSuite {
                 "firTest",
                 "laTest",
                 null,
+                null,
                 null));
         when(controller.getUsers()).thenReturn(users);
         //when & then
@@ -145,6 +139,7 @@ public class UserTestSuite {
                 "userTest",
                 "firTest",
                 "laTest",
+                null,
                 null,
                 null));
         String fragment = "Tes";
@@ -170,6 +165,7 @@ public class UserTestSuite {
                 "firTest",
                 "laTest",
                 department,
+                null,
                 null));
         String fragment = "DepTest";
         when(controller.getUserByDepartment(fragment)).thenReturn(users);

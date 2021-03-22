@@ -94,7 +94,8 @@ public class InvestmentTestSuite {
         //given
         DepartmentDto departmentDto = new DepartmentDto(1, "TestDep");
         RoleDto roleDto = new RoleDto(1, "USER");
-        UserDto user = new UserDto(1, "user", "fn", "ln", departmentDto, roleDto);
+        StatusDto statusDto = new StatusDto(1, "Active");
+        UserDto user = new UserDto(1, "user", "fn", "ln", departmentDto, roleDto, statusDto);
         StatusDto status = new StatusDto(1, "StTest");
         List<InvestmentDto> investments = new ArrayList<>();
         investments.add(new InvestmentDto(

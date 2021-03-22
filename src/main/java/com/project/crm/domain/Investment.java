@@ -1,7 +1,6 @@
 package com.project.crm.domain;
 
 import com.sun.istack.NotNull;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,23 +10,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity(name = "investments")
 public class Investment {
 
-    public Investment(String name, String address, User registeredBy, Status status) {
+    public Investment(String name, String address, User registeredBy) {
         this.name = name;
         this.address = address;
         this.registeredBy = registeredBy;
-        this.companies = new ArrayList<>();
-        this.clients = new ArrayList<>();
-        this.status = status;
     }
 
     private static Logger LOGGER = LoggerFactory.getLogger(Investment.class);
@@ -42,7 +36,7 @@ public class Investment {
 
     private String address;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToOne(cascade = CascadeType.MERGE)
     @NotFound(action = NotFoundAction.IGNORE)
     @JoinColumn(name = "user_id")
     private User registeredBy;
@@ -60,7 +54,7 @@ public class Investment {
     @NotFound(action = NotFoundAction.IGNORE)
     private List<Client> clients;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToOne(cascade = CascadeType.MERGE)
     @NotFound(action = NotFoundAction.IGNORE)
     @JoinColumn(name = "status_id")
     private Status status;

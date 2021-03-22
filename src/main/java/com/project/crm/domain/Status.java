@@ -1,23 +1,20 @@
 package com.project.crm.domain;
 
 import com.sun.istack.NotNull;
-import lombok.*;
-import org.hibernate.annotations.NotFound;
-import org.hibernate.annotations.NotFoundAction;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @Entity(name = "statuses")
 public class Status {
 
     public Status(String name) {
         this.name = name;
-        this.tasks = new ArrayList<>();
-        this.investments = new ArrayList<>();
     }
 
     @Id
@@ -29,12 +26,5 @@ public class Status {
     @Column(unique = true)
     private String name;
 
-    @OneToMany(mappedBy = "status")
-    @NotFound(action = NotFoundAction.IGNORE)
-    private List<Task> tasks;
-
-    @OneToMany(mappedBy = "status")
-    @NotFound(action = NotFoundAction.IGNORE)
-    private List<Investment> investments;
 
 }

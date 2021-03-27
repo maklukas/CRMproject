@@ -228,4 +228,13 @@ public class UserService implements UserDetailsService {
                 .collect(Collectors.toList());
     }
 
+    public User getUserFromSession() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetails) {
+            return service.user.getUserByUsername(((UserDetails) principal).getUsername());
+        } else {
+            return null;
+        }
+    }
+
 }

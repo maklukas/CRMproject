@@ -48,7 +48,7 @@ public class TaskTestSuite {
                 null,
                 null);
         String context = new Gson().toJson(task);
-        doNothing().when(controller).createTask(task);
+        doNothing().when(controller).createTask(task, null);
         //when & then
         mockMvc.perform(post("/v1/tasks").contentType(MediaType.APPLICATION_JSON_VALUE).content(context))
                 .andExpect(status().isOk());

@@ -1,10 +1,10 @@
 package com.project.crm.domain.Dto;
 
-import com.project.crm.domain.Status;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -20,5 +20,6 @@ public class TaskDto {
     private String title;
     private String description;
     private LocalDateTime creationTime;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime realizationTime;
 }

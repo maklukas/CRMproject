@@ -9,6 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,12 +26,17 @@ public class TaskService {
 
     public boolean createTask(Task task) {
         LOGGER.info("Adding task");
-        Status status;
+        List<User> users = new ArrayList<>();
 
         try {
+            task.setCreationTime(LocalDateTime.now());
 
-            if (task.getUsers().size() != 0) {
-                task.setUsers(service.user.getUsersByUsernames(task.getUsers().stream().map(User::getUsername).collect(Collectors.toList())));
+            if (service.user.getUserFromSession() != null) {
+                users.add(service.user.getUserFromSession());
+                task.setUsers(users);
+            } else if (task.getUsers().size() != 0) {
+                users.addAll(service.user.getUsersByUsernames(task.getUsers().stream().map(User::getUsername).collect(Collectors.toList())));
+                task.setUsers(users);
             }
 
             if (task.getStatus() != null) {

@@ -12,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.List;
 
 @Controller
@@ -47,6 +49,7 @@ public class CommonController {
         String username = userObject.getUsername();
         List<TaskDto> tasks = mapper.task.mapToTaskDtoList(service.task.getTasks4TheUser(username));
         model.addAttribute("tasks", tasks);
+        model.addAttribute("formatDateTime", DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM));
         return "tasks";
     }
 

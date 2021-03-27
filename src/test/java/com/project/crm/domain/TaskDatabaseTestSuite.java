@@ -8,6 +8,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,6 +51,12 @@ public class TaskDatabaseTestSuite {
 //        service.department.deleteDepartment(department.getId());
 //        service.user.deleteUser(user.getId());
 //        service.task.deleteTask(task.getId());
+    }
+
+    @Test
+    public void tes() {
+        Task task = new Task("Test", "Test", LocalDateTime.now().plusDays(1));
+        System.out.println(task.getRealizationTime().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)));
     }
 
 

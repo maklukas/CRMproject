@@ -7,7 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -21,10 +22,20 @@ public class TaskController {
     @Autowired
     private MapperConnected mapper;
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void createTask(@RequestBody TaskDto taskDto) {
+    @PostMapping
+    public void createTask(@ModelAttribute TaskDto taskDto, HttpServletResponse response) {
         service.task.createTask(mapper.task.mapToTask(taskDto));
+        try {
+            response.sendRedirect("/tasks");
+        } catch (IOException e) {
+
+        }
     }
+
+//    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+//    public void createTask(@RequestBody TaskDto taskDto) {
+//        service.task.createTask(mapper.task.mapToTask(taskDto));
+//    }
 
     @PatchMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public void updateTask(@RequestBody TaskDto taskDto) {

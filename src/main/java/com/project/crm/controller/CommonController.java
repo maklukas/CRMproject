@@ -79,7 +79,7 @@ public class CommonController {
         if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
             return "login";
         }
-        return "redirect:/hello";
+        return "redirect:/tasks";
     }
 
 }

@@ -1,3 +1,5 @@
+com/project/crm/TestSuite.java
+ com.project.crm.TestSuite
 com/project/crm/controller/InvestmentTestSuite.java
  com.project.crm.controller.InvestmentTestSuite
 com/project/crm/domain/UserDatabaseTestSuite.java
@@ -8,8 +10,6 @@ com/project/crm/mapper/MapperTestSuite.java
  com.project.crm.mapper.MapperTestSuite
 com/project/crm/controller/CompanyTestSuite.java
  com.project.crm.controller.CompanyTestSuite
-com/project/crm/TestSuite.java
- com.project.crm.TestSuite
 com/project/crm/domain/StatusDatabaseTestSuite.java
  com.project.crm.domain.StatusDatabaseTestSuite
 com/project/crm/controller/TaskTestSuite.java

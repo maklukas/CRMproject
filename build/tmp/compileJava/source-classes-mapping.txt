@@ -10,6 +10,8 @@ com/project/crm/domain/Dto/StatusDto.java
  com.project.crm.domain.Dto.StatusDto
 com/project/crm/controller/UserController.java
  com.project.crm.controller.UserController
+com/project/crm/domain/Dto/RateDto.java
+ com.project.crm.domain.Dto.RateDto
 com/project/crm/domain/Status.java
  com.project.crm.domain.Status
 com/project/crm/configuration/ApplicationConfig.java
@@ -28,6 +30,8 @@ com/project/crm/service/ServiceConnected.java
  com.project.crm.service.ServiceConnected
 com/project/crm/mapper/InvestmentMapper.java
  com.project.crm.mapper.InvestmentMapper
+com/project/crm/controller/CompanyController.java
+ com.project.crm.controller.CompanyController
 com/project/crm/service/ClientService.java
  com.project.crm.service.ClientService
 com/project/crm/mapper/StatusMapper.java
@@ -64,8 +68,8 @@ com/project/crm/repository/UserRepository.java
  com.project.crm.repository.UserRepository
 com/project/crm/repository/TaskRepository.java
  com.project.crm.repository.TaskRepository
-com/project/crm/controller/CompanyController.java
- com.project.crm.controller.CompanyController
+com/project/crm/controller/CommonController.java
+ com.project.crm.controller.CommonController
 com/project/crm/domain/Task.java
  com.project.crm.domain.Task
 com/project/crm/domain/Department.java
@@ -90,6 +94,8 @@ com/project/crm/repository/ClientRepository.java
  com.project.crm.repository.ClientRepository
 com/project/crm/mapper/ClientMapper.java
  com.project.crm.mapper.ClientMapper
+com/project/crm/domain/Dto/CurrencyDto.java
+ com.project.crm.domain.Dto.CurrencyDto
 com/project/crm/service/InvestmentService.java
  com.project.crm.service.InvestmentService
 com/project/crm/domain/Investment.java
@@ -100,5 +106,5 @@ com/project/crm/service/TaskService.java
  com.project.crm.service.TaskService
 com/project/crm/mapper/TaskMapper.java
  com.project.crm.mapper.TaskMapper
-com/project/crm/controller/CommonController.java
- com.project.crm.controller.CommonController
+com/project/crm/service/CurrencyClient.java
+ com.project.crm.service.CurrencyClient

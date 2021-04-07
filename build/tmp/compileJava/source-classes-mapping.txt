@@ -108,3 +108,5 @@ com/project/crm/mapper/TaskMapper.java
  com.project.crm.mapper.TaskMapper
 com/project/crm/service/CurrencyClient.java
  com.project.crm.service.CurrencyClient
+com/project/crm/controller/CurrencyController.java
+ com.project.crm.controller.CurrencyController

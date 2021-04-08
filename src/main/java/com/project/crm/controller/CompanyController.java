@@ -30,14 +30,14 @@ public class CompanyController {
         return mapper.company.mapToCompanyDtoList(service.company.getCompanies());
     }
 
-    @GetMapping(path = "/{id}")
-    public CompanyDto getCompanyById(@PathVariable int id) {
+    @GetMapping(params = "id")
+    public CompanyDto getCompanyById(@RequestParam int id) {
         return mapper.company.mapToCompanyDto(service.company.getCompanyById(id));
     }
 
-    @GetMapping(path = "/fragment/{txt}")
-    public List<CompanyDto> getCompaniesByFragment(@PathVariable String txt) {
-        return mapper.company.mapToCompanyDtoList(service.company.getCompanyByFragment(txt));
+    @GetMapping(params = "fragment")
+    public List<CompanyDto> getCompaniesByFragment(@RequestParam String fragment) {
+        return mapper.company.mapToCompanyDtoList(service.company.getCompanyByFragment(fragment));
     }
 
     @PatchMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -45,8 +45,8 @@ public class CompanyController {
         service.company.updateCompany(mapper.company.mapToCompany(companyDto));
     }
 
-    @DeleteMapping(path = "/{id}")
-    public void deleteCompany(@PathVariable int id) {
+    @DeleteMapping(params = "id")
+    public void deleteCompany(@RequestParam int id) {
         service.company.deleteCompany(id);
     }
 }

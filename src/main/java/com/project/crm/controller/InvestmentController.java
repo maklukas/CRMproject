@@ -29,8 +29,8 @@ public class InvestmentController {
         service.investment.updateInvestment(mapper.investment.mapToInvestment(investmentDto));
     }
 
-    @DeleteMapping(path = "/{id}")
-    public void deleteInvestment(@PathVariable int id) {
+    @DeleteMapping(params = "id")
+    public void deleteInvestment(@RequestParam int id) {
         service.investment.deleteInvestment(id);
     }
 
@@ -39,13 +39,13 @@ public class InvestmentController {
         return mapper.investment.mapToInvestmentDtoList(service.investment.getInvestments());
     }
 
-    @GetMapping (path = "/{id}")
-    public InvestmentDto getInvestmentById(@PathVariable int id) {
+    @GetMapping (params = "id")
+    public InvestmentDto getInvestmentById(@RequestParam int id) {
         return mapper.investment.mapToInvestmentDto(service.investment.getInvestmentById(id));
     }
 
-    @GetMapping (path = "/fragment/{txt}")
-    public List<InvestmentDto> getInvestmentByFragment(@PathVariable String txt) {
-        return mapper.investment.mapToInvestmentDtoList(service.investment.getInvestmentByFragment(txt));
+    @GetMapping (params = "fragment")
+    public List<InvestmentDto> getInvestmentByFragment(@RequestParam String fragment) {
+        return mapper.investment.mapToInvestmentDtoList(service.investment.getInvestmentByFragment(fragment));
     }
 }

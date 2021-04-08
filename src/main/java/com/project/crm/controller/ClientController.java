@@ -30,8 +30,8 @@ public class ClientController {
         service.client.updateClient(mapper.client.mapToClient(clientDto));
     }
 
-    @DeleteMapping(path = "/{id}")
-    public void deleteClient(@PathVariable int id) {
+    @DeleteMapping(params = "id")
+    public void deleteClient(@RequestParam int id) {
         service.client.deleteClient(id);
     }
 
@@ -40,13 +40,13 @@ public class ClientController {
         return mapper.client.mapToClientDtoList(service.client.getClients());
     }
 
-    @GetMapping(path = "/{id}")
-    public ClientDto getClientById(@PathVariable int id) {
+    @GetMapping(params = "id")
+    public ClientDto getClientById(@RequestParam int id) {
         return mapper.client.mapToClientDto(service.client.getClientById(id));
     }
 
-    @GetMapping(path = "/fragment/{txt}")
-    public List<ClientDto> getClientByFragment(@PathVariable String txt) {
-        return mapper.client.mapToClientDtoList(service.client.getClientByFragment(txt));
+    @GetMapping(params = "fragment")
+    public List<ClientDto> getClientByFragment(@RequestParam String fragment) {
+        return mapper.client.mapToClientDtoList(service.client.getClientByFragment(fragment));
     }
 }

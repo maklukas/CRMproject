@@ -42,8 +42,8 @@ public class TaskController {
         service.task.updateTask(mapper.task.mapToTask(taskDto));
     }
 
-    @DeleteMapping(path = "/{id}")
-    public void deleteTask(@PathVariable int id) {
+    @DeleteMapping(params = "id")
+    public void deleteTask(@RequestParam int id) {
         service.task.deleteTask(id);
     }
 
@@ -52,13 +52,13 @@ public class TaskController {
         return mapper.task.mapToTaskDtoList(service.task.getTasks());
     }
 
-    @GetMapping(path = "/{id}")
-    public TaskDto getTaskById(@PathVariable int id) {
+    @GetMapping(params = "id")
+    public TaskDto getTaskById(@RequestParam int id) {
         return mapper.task.mapToTaskDto(service.task.getTaskById(id));
     }
 
-    @GetMapping(path = "/fragment/{txt}")
-    public List<TaskDto> getTaskByFragment(@PathVariable String txt) {
-        return mapper.task.mapToTaskDtoList(service.task.getTaskByFragment(txt));
+    @GetMapping(params = "fragment")
+    public List<TaskDto> getTaskByFragment(@RequestParam String fragment) {
+        return mapper.task.mapToTaskDtoList(service.task.getTaskByFragment(fragment));
     }
 }

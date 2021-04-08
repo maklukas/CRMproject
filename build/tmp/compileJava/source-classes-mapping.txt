@@ -8,8 +8,8 @@ com/project/crm/repository/CompanyRepository.java
  com.project.crm.repository.CompanyRepository
 com/project/crm/domain/Dto/StatusDto.java
  com.project.crm.domain.Dto.StatusDto
-com/project/crm/controller/UserController.java
- com.project.crm.controller.UserController
+com/project/crm/service/TaskService.java
+ com.project.crm.service.TaskService
 com/project/crm/domain/Dto/RateDto.java
  com.project.crm.domain.Dto.RateDto
 com/project/crm/domain/Status.java
@@ -30,8 +30,8 @@ com/project/crm/service/ServiceConnected.java
  com.project.crm.service.ServiceConnected
 com/project/crm/mapper/InvestmentMapper.java
  com.project.crm.mapper.InvestmentMapper
-com/project/crm/controller/CompanyController.java
- com.project.crm.controller.CompanyController
+com/project/crm/mapper/TaskMapper.java
+ com.project.crm.mapper.TaskMapper
 com/project/crm/service/ClientService.java
  com.project.crm.service.ClientService
 com/project/crm/mapper/StatusMapper.java
@@ -56,8 +56,8 @@ com/project/crm/domain/Dto/UserDto.java
  com.project.crm.domain.Dto.UserDto
 com/project/crm/domain/Dto/TaskDto.java
  com.project.crm.domain.Dto.TaskDto
-com/project/crm/controller/TaskController.java
- com.project.crm.controller.TaskController
+com/project/crm/service/DepartmentService.java
+ com.project.crm.service.DepartmentService
 com/project/crm/service/UserService.java
  com.project.crm.service.UserService
 com/project/crm/domain/Dto/RoleDto.java
@@ -76,8 +76,8 @@ com/project/crm/domain/Department.java
  com.project.crm.domain.Department
 com/project/crm/domain/Dto/DepartmentDto.java
  com.project.crm.domain.Dto.DepartmentDto
-com/project/crm/controller/InvestmentController.java
- com.project.crm.controller.InvestmentController
+com/project/crm/controller/CompanyController.java
+ com.project.crm.controller.CompanyController
 com/project/crm/domain/Role.java
  com.project.crm.domain.Role
 com/project/crm/domain/Company.java
@@ -100,13 +100,13 @@ com/project/crm/service/InvestmentService.java
  com.project.crm.service.InvestmentService
 com/project/crm/domain/Investment.java
  com.project.crm.domain.Investment
-com/project/crm/service/DepartmentService.java
- com.project.crm.service.DepartmentService
-com/project/crm/service/TaskService.java
- com.project.crm.service.TaskService
-com/project/crm/mapper/TaskMapper.java
- com.project.crm.mapper.TaskMapper
-com/project/crm/service/CurrencyClient.java
- com.project.crm.service.CurrencyClient
+com/project/crm/controller/TaskController.java
+ com.project.crm.controller.TaskController
 com/project/crm/controller/CurrencyController.java
  com.project.crm.controller.CurrencyController
+com/project/crm/controller/InvestmentController.java
+ com.project.crm.controller.InvestmentController
+com/project/crm/controller/UserController.java
+ com.project.crm.controller.UserController
+com/project/crm/service/CurrencyClient.java
+ com.project.crm.service.CurrencyClient

@@ -33,28 +33,28 @@ public class UserController {
         return mapper.user.mapToUserDtoList(userService.user.getUsers());
     }
 
-    @GetMapping(path = "/{id}")
-    public UserDto getUser(@PathVariable int id) {
+    @GetMapping(params = "id")
+    public UserDto getUser(@RequestParam int id) {
         return mapper.user.mapToUserDto(userService.user.getUserById(id));
     }
 
-    @GetMapping(path = "/fragment/{txt}")
-    public List<UserDto> getUserByName(@PathVariable String txt) {
-        return mapper.user.mapToUserDtoList(userService.user.getUserByFragment(txt));
+    @GetMapping(params = "fragment")
+    public List<UserDto> getUserByName(@RequestParam String fragment) {
+        return mapper.user.mapToUserDtoList(userService.user.getUserByFragment(fragment));
     }
 
-    @GetMapping(path = "/department/{departmentName}")
-    public List<UserDto> getUserByDepartment(@PathVariable String departmentName) {
-        return mapper.user.mapToUserDtoList(userService.user.getUserByDepartment(departmentName));
+    @GetMapping(params = "department")
+    public List<UserDto> getUserByDepartment(@RequestParam String department) {
+        return mapper.user.mapToUserDtoList(userService.user.getUserByDepartment(department));
     }
 
-    @GetMapping(path = "/role/{roleName}")
-    public List<UserDto> getUserByRole(@PathVariable String roleName) {
-        return mapper.user.mapToUserDtoList(userService.user.getUserByRole(roleName));
+    @GetMapping(params = "role}")
+    public List<UserDto> getUserByRole(@RequestParam String role) {
+        return mapper.user.mapToUserDtoList(userService.user.getUserByRole(role));
     }
 
-    @DeleteMapping(path = "/{id}")
-    public void deleteUser(@PathVariable int id) {
+    @DeleteMapping(params = "id")
+    public void deleteUser(@RequestParam int id) {
         userService.user.deleteUser(id);
     }
 

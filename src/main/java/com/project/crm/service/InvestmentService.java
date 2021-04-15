@@ -19,32 +19,23 @@ import java.util.stream.Collectors;
 public class InvestmentService {
     private static Logger LOGGER = LoggerFactory.getLogger(InvestmentService.class);
 
-    @Autowired
     private InvestmentRepository repository;
-
-    @Autowired
     private PasswordEncoder passwordEncoder;
-
-    @Autowired
     private StatusRepository statusRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    public InvestmentService(InvestmentRepository repository, PasswordEncoder passwordEncoder, StatusRepository statusRepository, UserRepository userRepository) {
+        this.repository = repository;
+        this.passwordEncoder = passwordEncoder;
+        this.statusRepository = statusRepository;
+        this.userRepository = userRepository;
+    }
 
     public boolean createInvestment(Investment investment) {
         LOGGER.info("Adding new investment");
-        Status status;
-        User registeredBy;
-        investment.getRegisteredBy().setPassword(passwordEncoder.encode(investment.getRegisteredBy().getPassword()));
         try {
-            if (investment.getStatus() != null) {
-                status = statusRepository.findByName(investment.getStatus().getName()).orElse(investment.getStatus());
-                investment.setStatus(status);
-            }
-            if (investment.getRegisteredBy() != null) {
-                registeredBy = userRepository.findByUsername(investment.getRegisteredBy().getUsername()).orElse(investment.getRegisteredBy());
-                investment.setRegisteredBy(registeredBy);
-            }
+            decore(investment);
             repository.save(investment);
             return true;
         } catch (Exception e) {
@@ -53,25 +44,41 @@ public class InvestmentService {
         }
     }
 
+    private void decore(Investment investment) {
+        encodeUserPass(investment);
+        setStatus(investment);
+        setRegisterByUser(investment);
+    }
+
+    private void setStatus(Investment investment) {
+        Status status;
+        if (investment.getStatus() != null) {
+            status = statusRepository.findByName(investment.getStatus().getName()).orElse(investment.getStatus());
+            investment.setStatus(status);
+        }
+    }
+
+    private void encodeUserPass(Investment investment) {
+        investment.getRegisteredBy().setPassword(passwordEncoder.encode(investment.getRegisteredBy().getPassword()));
+    }
+
     public boolean updateInvestment(Investment investment) {
         LOGGER.info("Updating investment");
-        Status status;
-        User registeredBy;
-        investment.getRegisteredBy().setPassword(passwordEncoder.encode(investment.getRegisteredBy().getPassword()));
         try {
-            if (investment.getStatus() != null) {
-                status = statusRepository.findByName(investment.getStatus().getName()).orElse(investment.getStatus());
-                investment.setStatus(status);
-            }
-            if (investment.getRegisteredBy() != null) {
-                registeredBy = userRepository.findByUsername(investment.getRegisteredBy().getUsername()).orElse(investment.getRegisteredBy());
-                investment.setRegisteredBy(registeredBy);
-            }
+            decore(investment);
             repository.save(investment);
             return true;
         } catch (Exception e) {
             LOGGER.error("Cannot update investment. " + e);
             return false;
+        }
+    }
+
+    private void setRegisterByUser(Investment investment) {
+        User registeredBy;
+        if (investment.getRegisteredBy() != null) {
+            registeredBy = userRepository.findByUsername(investment.getRegisteredBy().getUsername()).orElse(investment.getRegisteredBy());
+            investment.setRegisteredBy(registeredBy);
         }
     }
 

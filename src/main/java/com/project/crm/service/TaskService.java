@@ -18,33 +18,20 @@ import java.util.stream.Collectors;
 public class TaskService {
     private static Logger LOGGER = LoggerFactory.getLogger(TaskService.class);
 
-    @Autowired
     private TaskRepository repository;
+    private ServiceConnected service;
 
     @Autowired
-    private ServiceConnected service;
+    public TaskService(TaskRepository repository, ServiceConnected service) {
+        this.repository = repository;
+        this.service = service;
+    }
 
     public boolean createTask(Task task) {
         LOGGER.info("Adding task");
         List<User> users = new ArrayList<>();
-
         try {
-            task.setCreationTime(LocalDateTime.now());
-
-            if (service.user.getUserFromSession() != null) {
-                users.add(service.user.getUserFromSession());
-                task.setUsers(users);
-            } else if (task.getUsers().size() != 0) {
-                users.addAll(service.user.getUsersByUsernames(task.getUsers().stream().map(User::getUsername).collect(Collectors.toList())));
-                task.setUsers(users);
-            }
-
-            if (task.getStatus() != null) {
-                task.setStatus(service.status.createStatus(task.getStatus()));
-            } else {
-                task.setStatus(service.status.createStatus(new Status("Active")));
-            }
-
+            decorate(task, users);
             repository.save(task);
             return true;
         } catch (Exception e) {
@@ -53,14 +40,34 @@ public class TaskService {
         }
     }
 
+    private void decorate(Task task, List<User> users) {
+        task.setCreationTime(LocalDateTime.now());
+        setUser(task, users);
+        setStatus(task);
+    }
+
+    private void setStatus(Task task) {
+        if (task.getStatus() != null) {
+            task.setStatus(service.status.createStatus(task.getStatus()));
+        } else {
+            task.setStatus(service.status.createStatus(new Status("Active")));
+        }
+    }
+
+    private void setUser(Task task, List<User> users) {
+        if (service.user.getUserFromSession() != null) {
+            users.add(service.user.getUserFromSession());
+            task.setUsers(users);
+        } else if (task.getUsers().size() != 0) {
+            users.addAll(service.user.getUsersByUsernames(task.getUsers().stream().map(User::getUsername).collect(Collectors.toList())));
+            task.setUsers(users);
+        }
+    }
+
     public boolean updateTask(Task task) {
         LOGGER.info("Updating task");
-        Status status;
         try {
-            if (task.getStatus() != null) {
-                status = service.status.getStatusByName(task.getStatus().getName());
-                task.setStatus(status);
-            }
+            setStatus(task);
             repository.save(task);
             return true;
         } catch (Exception e) {

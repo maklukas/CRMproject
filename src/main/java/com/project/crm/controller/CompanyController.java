@@ -14,11 +14,14 @@ import java.util.List;
 @RequestMapping(path = "/v1/companies")
 public class CompanyController {
 
-    @Autowired
     private ServiceConnected service;
+    private MapperConnected mapper;
 
     @Autowired
-    private MapperConnected mapper;
+    public CompanyController(ServiceConnected service, MapperConnected mapper) {
+        this.service = service;
+        this.mapper = mapper;
+    }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public void createCompany(@RequestBody CompanyDto companyDto) {
@@ -39,6 +42,8 @@ public class CompanyController {
     public List<CompanyDto> getCompaniesByFragment(@RequestParam String fragment) {
         return mapper.company.mapToCompanyDtoList(service.company.getCompanyByFragment(fragment));
     }
+
+    //TODO add @PutMapping method
 
     @PatchMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public void updateCompany(@RequestBody CompanyDto companyDto) {

@@ -16,11 +16,14 @@ import java.util.List;
 @RestController
 public class UserController {
 
-    @Autowired
     private ServiceConnected userService;
+    private MapperConnected mapper;
 
     @Autowired
-    private MapperConnected mapper;
+    public UserController(ServiceConnected userService, MapperConnected mapper) {
+        this.userService = userService;
+        this.mapper = mapper;
+    }
 
     @PostMapping
     public void addNewUser (@ModelAttribute User user, HttpServletResponse response) throws IOException {
@@ -57,6 +60,8 @@ public class UserController {
     public void deleteUser(@RequestParam int id) {
         userService.user.deleteUser(id);
     }
+
+    //TODO add @PutMapping method
 
     @PatchMapping
     public void updateUser(@ModelAttribute User user) {

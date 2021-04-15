@@ -14,16 +14,21 @@ import java.util.List;
 @CrossOrigin("*")
 public class ClientController {
 
-    @Autowired
     private ServiceConnected service;
+    private MapperConnected mapper;
 
     @Autowired
-    private MapperConnected mapper;
+    public ClientController(ServiceConnected service, MapperConnected mapper) {
+        this.service = service;
+        this.mapper = mapper;
+    }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public void createClient(@RequestBody ClientDto clientDto) {
         service.client.createClient(mapper.client.mapToClient(clientDto));
     }
+
+   //TODO add @PutMapping method
 
     @PatchMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public void updateClient(@RequestBody ClientDto clientDto) {

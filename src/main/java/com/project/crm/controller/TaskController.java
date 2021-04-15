@@ -16,11 +16,14 @@ import java.util.List;
 @CrossOrigin("*")
 public class TaskController {
 
-    @Autowired
     private ServiceConnected service;
+    private MapperConnected mapper;
 
     @Autowired
-    private MapperConnected mapper;
+    public TaskController(ServiceConnected service, MapperConnected mapper) {
+        this.service = service;
+        this.mapper = mapper;
+    }
 
     @PostMapping
     public void createTask(@ModelAttribute TaskDto taskDto, HttpServletResponse response) {
@@ -36,6 +39,8 @@ public class TaskController {
 //    public void createTask(@RequestBody TaskDto taskDto) {
 //        service.task.createTask(mapper.task.mapToTask(taskDto));
 //    }
+
+    //TODO add @PutMapping method
 
     @PatchMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public void updateTask(@RequestBody TaskDto taskDto) {

@@ -14,20 +14,28 @@ public class DepartmentService {
 
     private static Logger LOGGER = LoggerFactory.getLogger(DepartmentService.class);
 
-    @Autowired
     private DepartmentRepository repository;
+
+    @Autowired
+    public DepartmentService(DepartmentRepository repository) {
+        this.repository = repository;
+    }
 
     public Department createDepartment(Department department) {
         LOGGER.info("Adding department");
         try {
-            if (getDepartmentByName(department.getName()) != null) {
-                return getDepartmentByName(department.getName());
-            } else {
-                return repository.save(department);
-            }
+            return getDepartment(department);
         } catch (Exception e) {
             LOGGER.error("Cannot create department. " + e);
             return null;
+        }
+    }
+
+    private Department getDepartment(Department department) {
+        if (getDepartmentByName(department.getName()) != null) {
+            return getDepartmentByName(department.getName());
+        } else {
+            return repository.save(department);
         }
     }
 

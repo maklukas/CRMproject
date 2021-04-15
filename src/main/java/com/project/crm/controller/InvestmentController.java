@@ -13,16 +13,22 @@ import java.util.List;
 @RequestMapping(path = "/v1/investments")
 @CrossOrigin("*")
 public class InvestmentController {
-    @Autowired
+
     private ServiceConnected service;
+    private MapperConnected mapper;
 
     @Autowired
-    private MapperConnected mapper;
+    public InvestmentController(ServiceConnected service, MapperConnected mapper) {
+        this.service = service;
+        this.mapper = mapper;
+    }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public void createInvestment(@RequestBody InvestmentDto investmentDto) {
         service.investment.createInvestment(mapper.investment.mapToInvestment(investmentDto));
     }
+
+    //TODO add @PutMapping method
 
     @PatchMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public void updateInvestment(@RequestBody InvestmentDto investmentDto) {

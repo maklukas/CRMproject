@@ -14,20 +14,28 @@ public class RoleService {
 
     private static Logger LOGGER = LoggerFactory.getLogger(RoleService.class);
 
-    @Autowired
     private RoleRepository repository;
+
+    @Autowired
+    public RoleService(RoleRepository repository) {
+        this.repository = repository;
+    }
 
     public Role createRole(Role role) {
         LOGGER.info("Creating Role");
         try {
-            if (getRoleByName(role.getName()) != null) {
-                return getRoleByName(role.getName());
-            } else {
-                return repository.save(role);
-            }
+            return getRole(role);
         } catch (Exception e) {
             LOGGER.error("Cannot create Role. " + e);
             return null;
+        }
+    }
+
+    private Role getRole(Role role) {
+        if (getRoleByName(role.getName()) != null) {
+            return getRoleByName(role.getName());
+        } else {
+            return repository.save(role);
         }
     }
 

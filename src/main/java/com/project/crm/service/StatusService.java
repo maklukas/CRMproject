@@ -14,21 +14,29 @@ public class StatusService {
 
     private static Logger LOGGER = LoggerFactory.getLogger(StatusService.class);
 
-    @Autowired
     private StatusRepository repository;
+
+    @Autowired
+    public StatusService(StatusRepository repository) {
+        this.repository = repository;
+    }
 
     public Status createStatus(Status status) {
         LOGGER.info("Adding status");
 
         try {
-            if (getStatusByName(status.getName()) != null) {
-                return getStatusByName(status.getName());
-            } else {
-                return repository.save(status);
-            }
+            return getStatus(status);
         } catch (Exception e) {
             LOGGER.info("Cannot create status. " + e);
             return null;
+        }
+    }
+
+    private Status getStatus(Status status) {
+        if (getStatusByName(status.getName()) != null) {
+            return getStatusByName(status.getName());
+        } else {
+            return repository.save(status);
         }
     }
 

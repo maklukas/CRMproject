@@ -17,11 +17,14 @@ public class CompanyService {
 
     public static Logger LOGGER = LoggerFactory.getLogger(CompanyService.class);
 
-    @Autowired
     private CompanyRepository repository;
+    private ServiceConnected service;
 
     @Autowired
-    private ServiceConnected service;
+    public CompanyService(CompanyRepository repository, ServiceConnected service) {
+        this.repository = repository;
+        this.service = service;
+    }
 
     public List<Company> getCompanies() {
         LOGGER.info("Fetching all companies");
@@ -31,16 +34,20 @@ public class CompanyService {
     public boolean createCompany(Company company) {
         LOGGER.info("Adding company");
         try {
-            if (company.getStatus() != null) {
-                company.setStatus(service.status.createStatus(company.getStatus()));
-            } else {
-                company.setStatus(service.status.createStatus(new Status("Active")));
-            }
+            setStatus(company);
             repository.save(company);
             return true;
         } catch (Exception e){
             LOGGER.error("Client with the tax number already exists. " + e);
             return false;
+        }
+    }
+
+    private void setStatus(Company company) {
+        if (company.getStatus() != null) {
+            company.setStatus(service.status.createStatus(company.getStatus()));
+        } else {
+            company.setStatus(service.status.createStatus(new Status("Active")));
         }
     }
 

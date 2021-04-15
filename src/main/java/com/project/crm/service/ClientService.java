@@ -15,25 +15,32 @@ import java.util.stream.Collectors;
 public class ClientService {
     private static Logger LOGGER = LoggerFactory.getLogger(ClientService.class);
 
-    @Autowired
     private ClientRepository repository;
+    private ServiceConnected service;
 
     @Autowired
-    private ServiceConnected service;
+    public ClientService(ClientRepository repository, ServiceConnected service) {
+        this.repository = repository;
+        this.service = service;
+    }
 
     public boolean createClient(Client client) {
         LOGGER.info("Adding new client");
         try {
-            if (client.getStatus() != null) {
-                client.setStatus(service.status.createStatus(client.getStatus()));
-            } else {
-                client.setStatus(service.status.createStatus(new Status("Active")));
-            }
+            setStatus(client);
             repository.save(client);
             return true;
         } catch (Exception e) {
             LOGGER.error("Cannot create client " + e);
             return false;
+        }
+    }
+
+    private void setStatus(Client client) {
+        if (client.getStatus() != null) {
+            client.setStatus(service.status.createStatus(client.getStatus()));
+        } else {
+            client.setStatus(service.status.createStatus(new Status("Active")));
         }
     }
 

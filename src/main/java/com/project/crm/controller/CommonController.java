@@ -19,11 +19,14 @@ import java.util.List;
 @Controller
 public class CommonController {
 
-    @Autowired
     private ServiceConnected service;
+    private MapperConnected mapper;
 
     @Autowired
-    private MapperConnected mapper;
+    public CommonController(ServiceConnected service, MapperConnected mapper) {
+        this.service = service;
+        this.mapper = mapper;
+    }
 
     @GetMapping("")
     public String viewHomePage(ModelMap model) {

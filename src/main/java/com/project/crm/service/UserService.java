@@ -29,48 +29,79 @@ public class UserService implements UserDetailsService {
 
     private static Logger LOGGER = LoggerFactory.getLogger(UserService.class);
 
-    @Autowired
     private UserRepository repository;
-
-    @Autowired
     private ServiceConnected service;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    public UserService(UserRepository repository, ServiceConnected service, PasswordEncoder passwordEncoder) {
+        this.repository = repository;
+        this.service = service;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     public boolean createUser(User user) {
         LOGGER.info("Saving new user");
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         try {
-            if (!passwordEncoder.matches(user.getConfirmPassword(), user.getPassword())) {
-                LOGGER.error("Password and confirmed password are different");
-                return false;
-            } else {
-                if (user.getDepartment() != null) {
-                    user.setDepartment(service.department.createDepartment(user.getDepartment()));
-                }
-
-                if (user.getStatus() != null) {
-                    user.setStatus(service.status.createStatus(user.getStatus()));
-                } else {
-                    user.setStatus(service.status.createStatus(new Status("Active")));
-                }
-
-                if (user.getRole() != null) {
-                    user.setRole(service.role.createRole(user.getRole()));
-                } else {
-                    user.setRole(service.role.createRole(new Role("USER")));
-                }
+            decorate(user);
+            if (checkConfirmedPassword(user)) {
                 repository.save(user);
-
-                UserDetails newUser = loadUserByUsername(user.getUsername());
-                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(newUser, null, newUser.getAuthorities());
-                SecurityContextHolder.getContext().setAuthentication(authentication);
+                setAuthentication(user);
                 return true;
             }
+            return false;
         } catch (Exception e) {
             LOGGER.error("Cannot add new user. " + e);
             return false;
+        }
+    }
+
+    private void decorate(User user) {
+        setDepartment(user);
+        setStatus(user);
+        setRole(user);
+    }
+
+    private boolean checkConfirmedPassword(User user) {
+        if (!passwordEncoder.matches(user.getConfirmPassword(), user.getPassword())) {
+            LOGGER.error("Password and confirmed password are different");
+            return false;
+        }
+        return true;
+
+    }
+
+    private void setAuthentication(User user) {
+        UserDetails newUser = loadUserByUsername(user.getUsername());
+        UsernamePasswordAuthenticationToken authentication =
+                new UsernamePasswordAuthenticationToken(
+                        newUser,
+                        null,
+                        newUser.getAuthorities());
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+    }
+
+    private void setRole(User user) {
+        if (user.getRole() != null) {
+            user.setRole(service.role.createRole(user.getRole()));
+        } else {
+            user.setRole(service.role.createRole(new Role("USER")));
+        }
+    }
+
+    private void setStatus(User user) {
+        if (user.getStatus() != null) {
+            user.setStatus(service.status.createStatus(user.getStatus()));
+        } else {
+            user.setStatus(service.status.createStatus(new Status("Active")));
+        }
+    }
+
+    private void setDepartment(User user) {
+        if (user.getDepartment() != null) {
+            user.setDepartment(
+                    service.department.createDepartment(user.getDepartment()));
         }
     }
 
@@ -134,18 +165,8 @@ public class UserService implements UserDetailsService {
         LOGGER.info("Updating user");
         Role role;
         try {
-            if (user.getPassword() != null) {
-                user.setPassword(passwordEncoder.encode(user.getPassword()));
-            }
-            if (user.getDepartment() != null) {
-                try {
-                    service.department.createDepartment(user.getDepartment());
-                } catch (Exception e) {
-                    LOGGER.info("Fetching department");
-                } finally {
-                    user.setDepartment(service.department.getDepartmentByName(user.getDepartment().getName()));
-                }
-            }
+            setPassword(user);
+            setDepartment(user);
             if (user.getStatus() != null) {
                 try {
                     service.status.createStatus(user.getStatus());
@@ -186,6 +207,12 @@ public class UserService implements UserDetailsService {
         } catch (Exception e) {
             LOGGER.error("Cannot update user. " + e);
             return false;
+        }
+    }
+
+    private void setPassword(User user) {
+        if (user.getPassword() != null) {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
         }
     }
 

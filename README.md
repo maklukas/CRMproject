@@ -7,4 +7,11 @@ For better control of business situation you can assign tasks related to clients
 
 Name |
 -|
-Spring |
+Spring Boot |
+Lombok |
+Hibernate |
+MySQL |
+Gson |
+Spring Security |
+ModelMapper |
+Swagger |
